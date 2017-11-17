@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+.fake_wrapper{
+		position:inherit;
+		width:100%;
+		height:100%;
+		
+	}
+		#editContent{
+		height:400px;
+		font-size:large;
+		order-color: black;
+		border-style:solid;
+		border-width: 1px;
+		overflow:auto;
+		
+	}
+	.content-wrapper{
+	background-color: #222d32;
+	}
+
+	#wrapDiv{
+		background-color: #ffffff;
+		position:relative;
+		height:100%;
+		padding:2%;
+		border-radius: 15px;
+	}
+	.regForm{
+		background-color: #ffffff;
+	
+	}
+
+	.read_title{
+		font: bold;
+		font-size: large;
+		margin-left:10px;
+	}
+	.rep_wrap{
+		
+		float:left;
+		
+	}
+	#toList{
+		float:right;
+	}
+	.reply-scroll{
+		margin-left:auto;
+		margin-right:auto;
+		left:0;
+		right:0;
+		background-color: #2EFE9A;
+	}
+	.thumbNail{
+		width:50px;
+		height:50px;
+	}
+#regSec{
+	overflow-x: hidden;
+	overflow-y: auto;
+	
+}

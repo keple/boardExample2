@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.exBoard.persistence">
+  	<sql id="search">
+  		<if test = "keyword != null">
+  			<foreach item="item" index="idx" collection="types" open="where 1=1 and(" close="2=1)">
+  				<choose>
+  					<when test='types[idx]=="x"'>			
+  						1=1 or
+  					</when>
+  					<when test='types[idx]=="t"'>
+  						title like concat('%',#{keyword},'%') or
+  					</when>
+  					<when test='types[idx]=="c"'>
+  						content like concat('%',#{keyword},'%') or
+  					</when>
+  					<when test='types[idx]=="w"'>
+  						writer like concat('%',#{keyword},'%') or
+  					</when>
+  				</choose>
+  		
+  			</foreach>
+  		
+  		</if>
+  	</sql>
+  	
+  	
+  	<select id="boardList" parameterType="Criteria" resultType="BoardVO">
+  		select board.bno,board.title,board.content,board.writer,board.regdate,board.viewcount,count(rno) replyCount 
+  		from(
+  			select * from tbl_board 
+  		<include refid="search"></include>
+  			order by bno desc limit #{skip}, #{size}
+  		)board left outer join tbl_reply
+  		on board.bno = tbl_reply.bno
+  		group by board.bno
+  		order by bno desc
+  		
+  	</select>
+  	
+  	<insert id="boardInsert" parameterType="BoardVO">
+  		insert into tbl_board(title,content,writer) values (#{title},#{content},#{writer})
+  	</insert>
+  	<select id="getBoardTotal" resultType="Integer">
+  	select count(*) from tbl_board
+  	
+  	</select>
+  	<select id="findBoard" parameterType="Integer" resultType="BoardVO">
+  		select * from tbl_board where bno = #{no}
+  	</select>
+  	<select id="reply_list" parameterType="Criteria" resultType="ReplyVO">
+		select * from tbl_reply where bno = #{option} order by rno desc limit #{skip},#{size}
+  	
+  	</select>
+  	<insert id="replyInsert" parameterType="ReplyVO">
+  		insert into tbl_reply(content,writer,bno,randomUser) values (#{content},#{writer},#{bno},#{randomUser})
+  	
+  	</insert>
+  	<delete id="deleteBoard" parameterType="Integer">
+  		delete from tbl_board where bno = #{no}
+  	</delete>
+  	<update id="updateBoard" parameterType="BoardVO">
+  		update tbl_board set title=#{title}, content=#{content} where bno = #{bno}
+  	</update>
+  	<insert id="fileInsert" parameterType="FileVO">
+  		insert into tbl_files(fileName,bno) values (#{fileName},#{bno})
+  	</insert>
+  	<select id="getFileList" parameterType="Criteria" resultType="FileVO">
+  		select * from tbl_files where bno = #{option}
+  	</select>
+  	<select id="getBno" parameterType="BoardVO" resultType="Integer">
+		select max(bno) from tbl_board where writer = #{writer}  	
+  	</select>
+  </mapper>

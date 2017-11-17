@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+body{
+  background-image: url('/resources/img/mainIMG.gif');
+  background-size: cover;
+ background-color: hsla(0,0%,100%,0.20);
+ background-blend-mode: overlay;
+}
+.center {
+    margin: auto;
+    width: 100%;
+    -webkit-transform: translateX(10%);
+    padding: 10px;
+}
