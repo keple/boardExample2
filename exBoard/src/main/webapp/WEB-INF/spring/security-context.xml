@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<http auto-config='true'  use-expressions="true">
+		<intercept-url pattern="/login" access="permitAll" />
+		<intercept-url pattern="/user/**" access="permitAll"/>   
+		<intercept-url pattern="/resources/**" access="permitAll" />  
+		<intercept-url pattern="/board/**" access="hasRole('ROLE_USER')" /> 
+
+			<form-login login-page="/login"              
+				
+				login-processing-url="/j_spring_security_check"
+				
+				default-target-url="/board/list"
+
+				username-parameter="j_username"
+
+				password-parameter="j_password" 
+				 
+				authentication-success-handler-ref="customAuthenticationSuccessHandler"
+				authentication-failure-url="/login?error=true"/> 
+
+	
+			<logout invalidate-session="true" 
+					logout-url="/logout"
+					delete-cookies="JSESSIONID,SPRING_SECURITY_REMEMBERME_COOKIE"   
+					logout-success-url="/login?logout" />
+		<remember-me key="rememberKey"
+						remember-me-parameter="remem"
+						remember-me-cookie="myRememCookie"
+						token-validity-seconds="360"
+						user-service-ref="userService" />
+		
+	
+		<!-- enable csrf protection -->
+		 
+		<csrf disabled="true"></csrf>   
+
+	</http> 
+
+        <authentication-manager >
+		    <authentication-provider user-service-ref ="userService">
+		    	<password-encoder ref="bcryptPasswordEncoder"/>
+		    </authentication-provider>
+		    	
+		</authentication-manager>
+		<beans:bean id="userService" class="org.exBoard.service.LoginUserService"></beans:bean>
+   		<beans:bean id="customAuthenticationSuccessHandler" class="org.exBoard.security.PostHandler"></beans:bean>
+		<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		
+		</beans:bean>
+   
+
+</beans:beans>

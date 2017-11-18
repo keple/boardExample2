@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace ="org.exBoard.persistence">
+  	<select id="getUserInfo" parameterType="String" resultType="UserVO">
+  		select * from tbl_user where userid =#{userid};
+  	</select>
+  	<insert id="insertUser" parameterType="UserVO">
+  		insert into tbl_user(userid,upw,role) values(#{userid},#{upw},#{role})
+  	</insert>
+  
+  
+  
+  
+  </mapper>
