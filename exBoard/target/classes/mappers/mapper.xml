@@ -74,4 +74,8 @@
   	<select id="getBno" parameterType="BoardVO" resultType="Integer">
 		select max(bno) from tbl_board where writer = #{writer}  	
   	</select>
+  	<update id="increBoardCount" parameterType="Integer">
+  		update tbl_board set viewCount = viewCount+1 where bno=#{bno}
+  	
+  	</update>
   </mapper>

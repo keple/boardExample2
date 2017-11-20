@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
+@EnableWebSecurity
 public class LoginUserService implements UserDetailsService {
 	@Inject
 	UserDAO udao;

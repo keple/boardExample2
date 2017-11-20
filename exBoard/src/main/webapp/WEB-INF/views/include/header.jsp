@@ -3,7 +3,8 @@
 <%@ page import="java.util.Random" %>
 <% Random random = new Random(); 
     int token= random.nextInt();
-%> 		
+%> 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
   <meta charset="utf-8">
@@ -287,18 +288,28 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">${login.name}</span>
+             <sec:authorize access="isAnonymous()">
+             	 <span class="hidden-xs">Anonymous</span>
+             </sec:authorize>
+             
+             <sec:authorize access="isAuthenticated()">
+              <span class="hidden-xs"><sec:authentication property="principal.username" htmlEscape='false'/></span>
+            </sec:authorize>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+				
+				
+				<sec:authorize access="isAuthenticated()">
                 <p>
-                  			${login.name}
+                  <sec:authentication property="principal.username"/>
                   <small>Member since Nov. 2012</small>
                 </p>
+                </sec:authorize>
               </li>
+              
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row">
@@ -314,14 +325,24 @@
                 </div>
                 <!-- /.row -->
               </li>
+              
               <!-- Menu Footer-->
+              
               <li class="user-footer">
+              	<sec:authorize access="isAnonymous()">
+              		<div class="pull-left">
+                  		<a href="/login" class="btn btn-default btn-flat">Login</a>
+                	</div>
+              	</sec:authorize>
+                <sec:authorize access="isAuthenticated()">
                 <div class="pull-left">
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
+                
                 <div class="pull-right">
                   <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
                 </div>
+                </sec:authorize>
               </li>
             </ul>
           </li>
@@ -343,7 +364,12 @@
           <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>${login.name}</p>
+        	<sec:authorize access="isAnonymous()">
+        		<p>Anonymous</p>
+        	</sec:authorize>
+        	<sec:authorize access="isAuthenticated()">
+          		<p><sec:authentication property="principal.username"></sec:authentication></p>
+          </sec:authorize>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

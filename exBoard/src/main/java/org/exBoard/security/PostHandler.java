@@ -16,12 +16,6 @@ public class PostHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication arg2)
 			throws IOException, ServletException {
-		arg0.getSession().setAttribute("login", arg2);
-		Cookie[] cookie = arg0.getCookies();
-		
-		logger.warn(cookie[0].toString());
-		
-		
 		arg1.sendRedirect("/board/list");
 
 	}

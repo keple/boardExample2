@@ -79,8 +79,6 @@
           <!-- /.box -->
 
         <!-- /.col -->
-	<input type=hidden id="curpage" value="${criteria.pageNum}">
-	<input type=hidden id="viewSize" value = "${criteria.size}">
 	
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -91,15 +89,15 @@
 $(document).ready(function(){
 	var um = new urlMaker(new pageChanger(),'/board/pager'),
 	 	$newButton = $("#newBoard"),
-	 	$curpage = $("#curpage").val(),
-	 	$viewSize = $("#viewSize").val();
+	 	$curpage = ${criteria.pageNum},
+	 	$viewSize = ${criteria.size};
 	um.setParam('pageNum',$curpage);
 	um.setParam('size',$viewSize);
 	um.changeState(false).makeUrl();
 	um.getPageChanger().setType('get')
 					   .setSuccess(successFunctions.pagenation,{pageDivId:'pagination',currentPage:$curpage})
 					   .setFail(failFunctions.paginationFail)
-					   .callAjax();//에이작스
+					   .callAjax();
 	
 	//test
 	var btnArr=$('#pagination').find('button');
@@ -164,7 +162,8 @@ $(document).ready(function(){
 										.setParam('type',$('.type').val())
 										.setParam('keyword',$keyword)
 										.makeUrl()
-										.getPageChanger().redirect();
+										.getPageChanger()
+										.redirect();
 		
 	});
 	$("#searchBtn").on("click",function(e){

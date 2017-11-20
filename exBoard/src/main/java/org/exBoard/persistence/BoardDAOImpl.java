@@ -68,5 +68,8 @@ public class BoardDAOImpl extends GenericDAO<BoardVO, Integer, Criteria> {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".getBno", k);
 	}
+	public void increaseBoardCount(Integer bno){
+		session.update(namespace+".increBoardCount",bno);
+	}
 
 }

@@ -68,6 +68,7 @@ public class BoardController {
 		
 		
 	}
+	
 	@GetMapping("/register")
 	public void goRegistpage(){
 		
@@ -233,5 +234,4 @@ public class BoardController {
 	}
 	return entity;
 	}
-	
 }

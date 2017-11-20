@@ -73,8 +73,11 @@ public class ExBoardServiceImpl implements ExBoardService {
 	}
 
 	@Override
+	@Transactional
 	public BoardVO getBoard(Integer bno) {
 		// TODO Auto-generated method stub
+		boardDAO.increaseBoardCount(bno);
+		
 		return boardDAO.getObject(bno);
 	}
 
@@ -102,5 +105,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 		
 		return fileDAO.getList(cri); 
 	}
+
+
 
 }
