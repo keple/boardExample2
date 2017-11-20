@@ -99,6 +99,7 @@ $(document).ready(function(){
 					   .setFail(failFunctions.paginationFail)
 					   .callAjax();
 	
+	
 	//test
 	var btnArr=$('#pagination').find('button');
 	Array.prototype.forEach.call(btnArr,function(src,index){
