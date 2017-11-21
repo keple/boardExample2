@@ -57,6 +57,20 @@
 
 {{/files}}
 </script>
+<script id="updatePageFiles" type="text/x-handlebars-template">
+{{#files}}
+	{{#isOctet fileName}}
+	{{else}}
+		<div class="nifWrapper">
+			<a href="/board/display?fileName={{fileName}}" data-name='{{fileName}}'>
+				<img src="/board/display?fileName=tt.jpg" data-compare='tt' style="width:100px;height:100px"/>
+			</a>
+			<span>{{fileName}}</span>			
+			<a href="#" class="delThumb">X</a>
+		</div>
+	{{/isOctet}}
+{{/files}}
+</script>
 <script id="searchScript" type="text/x-handlebars-template">
 	
 

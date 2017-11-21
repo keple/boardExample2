@@ -155,7 +155,7 @@ $(document).ready(function(){
 	$("#toList").on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		new urlMaker(new pageChanger,"/board/list",true).setParam('pageNum',${cri.pageNum})
+		new urlMaker(new pageChanger(),"/board/list",true).setParam('pageNum',${cri.pageNum})
 												   .setParam('type',${cri.type})
 												   .setParam('keyword',${cri.keyword})
 												   .makeUrl()
@@ -168,6 +168,16 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		$('#fileListModal').modal({backdrop:'static'});
+		
+	});
+	$("#updBtn").on("click",function(e){
+		e.stopPropagation();
+		e.preventDefault();
+		
+		new urlMaker(new pageChanger(),'/board/registWithEditor',true).setParam("bno",$bno)
+															  .makeUrl()
+															  .getPageChanger()
+															  .redirect();
 		
 	})
 });

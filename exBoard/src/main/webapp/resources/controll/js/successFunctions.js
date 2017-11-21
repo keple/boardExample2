@@ -109,12 +109,24 @@ var successFunctions = (function(){
 		$('#'+option.target).append(html);
 		
 	}
+	var filesForUpdatePage = function(result,option){
+		var source = $('#updatePageFiles').html();
+		var template = Handlebars.compile(source);
+		var html = template({files:result});
+		
+		$("#"+option.target).append(html);
+		
+		
+		
+		
+	}
 	return {registSuccess:registSuccess,
 			pagenation:pagenation,
 			replySuccess:replySuccess,
 			replyAccept:replyAccept,
 			fileUploadSuccess:fileUploadSuccess,
-			fileAccept:fileAccept
+			fileAccept:fileAccept,
+			filesForUpdatePage:filesForUpdatePage
 	};
 	
 })();

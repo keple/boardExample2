@@ -14,12 +14,12 @@
 	function insertData(result){
 		
 		var _mockdata = {
-				'attachurl': 'http://127.0.0.1:8081/board/display?fileName='+result[0].src,
-				'filemime': 'image/gif',
+				'attachurl': 'http://127.0.0.1:8081/board/displayOct?fileName='+result[0].src,
+				'filemime': result[0].mimeType,
 				'filename': result[0].src,
 				'filesize': 640
 			};
-		console.log("넌 또 왜 그러니",_mockdata);
+		
 			execAttach(_mockdata);
 			closeWindow();
 		

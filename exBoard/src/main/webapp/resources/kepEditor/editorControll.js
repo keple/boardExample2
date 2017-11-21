@@ -45,7 +45,29 @@ var EditControll = (function(){
 			$('#'+formId).append(html);
 		})
 	}
-	
+	var scanElementForDaumEditor = function(contentDiv,formId){
+		var imgContentArr = contentDiv.find('img');
+		console.log('이미지콘텐츠',imgContentArr);
+		var downContentArr = contentDiv.find('a');
+		var source = $('#formInput').html();
+		var template = Handlebars.compile(source);
+		var html;
+		Array.prototype.forEach.call(imgContentArr,function(src,index){
+			console.log('$src.src',$(src).attr('data-compare'));
+			html = template({data:src.src.substring(src.src.indexOf('=')+1)});
+			
+			$('#'+formId).append(html);
+			
+		})
+		Array.prototype.forEach.call(downContentArr,function(src,index){
+			html = template({data:src.href.substring(src.href.indexOf("=")+1)});
+			
+			$('#'+formId).append(html);
+		})
+		
+		
+	}
+
 	var initiateAniContent = function(objArr){
 		console.log("ani",AnimationManager);
 		objArr.forEach(function(src,index){
@@ -75,6 +97,7 @@ var EditControll = (function(){
 			initiateAniContent:initiateAniContent,
 			scanElement:scanElement,
 			deleteImg:deleteImg,
-			downContentdelEvent:downContentdelEvent}
+			downContentdelEvent:downContentdelEvent,
+			scanElementForDaumEditor:scanElementForDaumEditor}
 	
 })();

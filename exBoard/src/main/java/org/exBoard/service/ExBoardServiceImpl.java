@@ -45,8 +45,10 @@ public class ExBoardServiceImpl implements ExBoardService {
 		FileVO fvo = new FileVO();
 		fvo.setBno(pri);
 		for(String name:dto.getFileNames()){
-			fvo.setFileName(name);
-			fileDAO.insert(fvo);
+			if(name.trim()!=""){
+				fvo.setFileName(name);
+				fileDAO.insert(fvo);
+			}
 		}
 		
 		return msg;
@@ -61,9 +63,22 @@ public class ExBoardServiceImpl implements ExBoardService {
 	}
 
 	@Override
-	public String updateBoard(BoardVO vo) {
+	@Transactional
+	public String updateBoard(BoardVO vo,FileDTO dto) {
 		// TODO Auto-generated method stub
-		return null;
+		String msg =MsgMap.getInstance().getMessage(boardDAO.update(vo));
+		//아.. 이방법은 안쓰고 싶은데
+		//처음부터 download링크랑 같이 본문에 넣었어야 하는거같다..
+		fileDAO.deleteAllFromBoard((vo.getBno()));
+		FileVO fvo = new FileVO();
+		for(String s:dto.getFileNames()){
+			if(s.trim()!=""){
+				fvo.setFileName(s);
+				fvo.setBno(vo.getBno());
+				fileDAO.insert(fvo);	
+			}
+		}
+		return msg;
 	}
 
 	@Override
@@ -104,6 +119,18 @@ public class ExBoardServiceImpl implements ExBoardService {
 		
 		
 		return fileDAO.getList(cri); 
+	}
+
+	@Override
+	public FileDTO getFileListAsDTO(Criteria cri) {
+		// TODO Auto-generated method stub
+		List<FileVO> voList = fileDAO.getList(cri);
+		FileDTO dto = new FileDTO();
+		for(int i=0;i<voList.size();i++){
+			dto.getFileNames().add(voList.get(i).getFileName());
+		}
+		
+		return dto;
 	}
 
 

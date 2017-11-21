@@ -17,6 +17,7 @@ import org.exBoard.domain.FileVO;
 import org.exBoard.domain.Pager;
 import org.exBoard.domain.ReplyVO;
 import org.exBoard.service.ExBoardService;
+import org.exBoard.util.DaumEditorMimeMap;
 import org.exBoard.util.FileUtil;
 import org.exBoard.util.FileWrapper;
 import org.exBoard.util.MediaUtil;
@@ -70,7 +71,12 @@ public class BoardController {
 	}
 	
 	@GetMapping("/register")
-	public void goRegistpage(){
+	public void goRegistpage(@RequestParam(value ="bno", required=false) Integer bno,Model model){
+		logger.info(bno);
+		//fileList?
+		if(bno!=null){
+			model.addAttribute("board",boardService.getBoard(bno));
+		}
 		
 	}
 	@PostMapping(value = "/register", produces="application/text;charset=utf8")
@@ -136,20 +142,11 @@ public class BoardController {
 		
 		return boardService.insertReply(rvo);
 	}
-	@GetMapping("/update")
-	public void toUpdate(@RequestParam("bno") Integer bno, Model model){
-		
-		model.addAttribute("board",boardService.getBoard(bno));
-		model.addAttribute("option", bno);
-		
-	}
-	@PostMapping("/update")
+	@PostMapping(value="/update", produces="application/text;charset=utf8")
 	@ResponseBody
-	public String updateBoard(BoardVO vo){
-		
-		
-		
-		return boardService.updateBoard(vo);
+	public String updateBoard(BoardVO vo,FileDTO dto){
+		logger.info("vo는뭐니"+vo+"\n"+"DTO는 : "+dto);
+		return boardService.updateBoard(vo,dto);
 	}
 	@PostMapping(value = "/fileUpload")
 	@ResponseBody
@@ -162,9 +159,9 @@ public class BoardController {
 		try{
 			for(int i=0;i<file.length;i++){
 				if(file[i].getSize()!=0){
-					
+					String type=file[i].getOriginalFilename().substring(file[i].getOriginalFilename().lastIndexOf(".")+1);
 					logger.info("이름이모니 :"+file[i].getOriginalFilename());
-					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, file[i].getOriginalFilename(), file[i].getBytes()),file[i].getOriginalFilename()));
+					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, file[i].getOriginalFilename(), file[i].getBytes()),file[i].getOriginalFilename(),DaumEditorMimeMap.getMediaType(type)));
 					
 				}
 				
@@ -234,16 +231,22 @@ public class BoardController {
 	}
 	return entity;
 	}
-	@GetMapping("/register2")
-	public String registerpage2(){
-		
+	@GetMapping("/registWithEditor")
+	public String registerpage2(@RequestParam(value ="bno", required=false) Integer bno,Model model){
+		logger.info(bno);
+		//fileList?
+		if(bno!=null){
+			model.addAttribute("board",boardService.getBoard(bno));
+		}
 		
 		return "/board/registWithDaumEditor";
 	}
-	@PostMapping("/register2")
-	public String register2Post(BoardVO vo){
+	
+	@PostMapping("/registWithEditor")
+	@ResponseBody
+	public String register2Post(BoardVO vo,FileDTO dto){
 		logger.info("content내용 이다" + "\t"+vo);
-		
-		return "redirect:/board/register2";
+		logger.info("우린예전에 끝났어"+dto);
+		return boardService.insertBoard(vo, dto);
 	}
 }

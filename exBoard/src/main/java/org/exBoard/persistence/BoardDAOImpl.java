@@ -2,13 +2,17 @@ package org.exBoard.persistence;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.apache.ibatis.session.SqlSession;
 import org.exBoard.domain.BoardVO;
 import org.exBoard.domain.Criteria;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BoardDAOImpl extends GenericDAO<BoardVO, Integer, Criteria> {
-
+public class BoardDAOImpl implements BoardDAO {
+	@Inject
+	SqlSession session;
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub

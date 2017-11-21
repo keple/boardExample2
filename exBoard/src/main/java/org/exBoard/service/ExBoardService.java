@@ -13,10 +13,11 @@ public interface ExBoardService {
 	public List<BoardVO> getBoardList(Criteria cri);
 	public String insertBoard(BoardVO vo,FileDTO dto);
 	public String deleteBoard(Integer no);
-	public String updateBoard(BoardVO vo);
+	public String updateBoard(BoardVO vo,FileDTO dto);
 	public Integer getTotal();
 	public BoardVO getBoard(Integer bno);
 	public String insertReply(ReplyVO rvo);
 	public List<ReplyVO> getReplyList(Criteria cri);
 	public List<FileVO> getFileList(Criteria cri);
+	public FileDTO getFileListAsDTO(Criteria cri);
 }

@@ -114,7 +114,7 @@ $(document).ready(function(){
 		e.stopPropagation();
 		e.preventDefault();
 		//redirect 파라미터=> url;
-		new urlMaker(new pageChanger(),'/board/register',true).makeUrl()
+		new urlMaker(new pageChanger(),'/board/registWithEditor',true).makeUrl()
 															 .getPageChanger()
 															 .redirect();//리다이렉트
 		

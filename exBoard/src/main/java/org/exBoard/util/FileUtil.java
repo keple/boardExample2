@@ -61,7 +61,7 @@ public class FileUtil {
 	public static String uploadFile(String uploadPath,String originalName,byte[] fileData)throws Exception{
 		UUID uid = UUID.randomUUID();
 		
-		String savedName = uid.toString() + "_" + originalName;
+		String savedName = "_"+uid.toString()+ originalName;
 		
 		String savedPath = calcPath(uploadPath);
 		

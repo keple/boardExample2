@@ -78,4 +78,7 @@
   		update tbl_board set viewCount = viewCount+1 where bno=#{bno}
   	
   	</update>
+  	<delete id="deleteAllFromBoard" parameterType="Integer">
+  		delete from tbl_files where bno = #{no}
+  	</delete>
   </mapper>

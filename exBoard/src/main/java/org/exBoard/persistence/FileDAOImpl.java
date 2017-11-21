@@ -7,7 +7,7 @@ import org.exBoard.domain.FileVO;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class FileDAOImpl extends GenericDAO<FileVO, Integer, Criteria> {
+public class FileDAOImpl extends GenericDAO<FileVO, Integer, Criteria> implements FileDAO{
 
 	@Override
 	public List<FileVO> getList(Criteria c) {
@@ -50,6 +50,12 @@ public class FileDAOImpl extends GenericDAO<FileVO, Integer, Criteria> {
 	public Integer getPrimary(FileVO k) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Integer deleteAllFromBoard(Integer no) {
+		// TODO Auto-generated method stub
+		return session.delete(namespace+".deleteAllFromBoard",no);
 	}
 
 }
