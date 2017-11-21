@@ -96,6 +96,8 @@ $("#regSec").on("click","#editF #intoContent",function(e){
 	var obj = moveToContent('regSec #editF #viewPort');
 	
 	obj.inContent.forEach(function(src,index){
+		console.log("넌머냐 src야",src.src);
+		src.src = src.src.replace("s_","");
 		$("#editContent").append(src);
 		
 		

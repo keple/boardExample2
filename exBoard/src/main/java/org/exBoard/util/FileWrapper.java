@@ -4,6 +4,7 @@ public class FileWrapper {
 
 	private String src;
 	private String originName;
+	
 	public FileWrapper(String src,String originalName){
 		this.src = src;
 		this.originName = originalName;

@@ -81,7 +81,7 @@ public class FileUtil {
 		}
 		
 		logger.info("ddd"+uploadedFileName);
-		return uploadedFileName.replace("s_", "");
+		return uploadedFileName;
 	
 	}
 

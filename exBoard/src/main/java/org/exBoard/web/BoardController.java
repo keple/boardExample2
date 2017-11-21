@@ -155,15 +155,15 @@ public class BoardController {
 	@ResponseBody
 	public ResponseEntity<List<FileWrapper>> fileUpload(@RequestParam("files[]")MultipartFile[] file){
 		
-		List<FileWrapper> fileNames = new ArrayList();
-		logger.info(file.toString());
+		List<FileWrapper> fileNames = new ArrayList<>();
+		logger.info(file[0].getOriginalFilename());
 		String tempPath = FileUtil.calcPath(uploadPath);
 		logger.info("what is path"+tempPath);
 		try{
 			for(int i=0;i<file.length;i++){
 				if(file[i].getSize()!=0){
 					
-					logger.info(file[i].getOriginalFilename());
+					logger.info("이름이모니 :"+file[i].getOriginalFilename());
 					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, file[i].getOriginalFilename(), file[i].getBytes()),file[i].getOriginalFilename()));
 					
 				}
@@ -233,5 +233,17 @@ public class BoardController {
 		in.close();
 	}
 	return entity;
+	}
+	@GetMapping("/register2")
+	public String registerpage2(){
+		
+		
+		return "/board/registWithDaumEditor";
+	}
+	@PostMapping("/register2")
+	public String register2Post(BoardVO vo){
+		logger.info("content내용 이다" + "\t"+vo);
+		
+		return "redirect:/board/register2";
 	}
 }

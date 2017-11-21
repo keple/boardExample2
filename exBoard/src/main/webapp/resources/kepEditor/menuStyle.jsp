@@ -90,7 +90,7 @@
 		
 
 	<div id='helpText' class="form-controll">
-        <span>URL을 작성해 주세요. http포함해서 작성해주셔야됩니다.</span>
+        <span>URL을 작성해 주세요.</span>
     </div>
 </div>
 </script>
