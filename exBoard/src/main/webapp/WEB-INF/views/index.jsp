@@ -20,13 +20,13 @@
 <body>
 <nav class="navbar navbar-inverse bg-inverse" style="width:100%;">
    <div id="buttonWrapper" style="width:20%;display:inline-block">
-         <button  id="prev"class="btn btn-primary" >
+         <button  id="prev"class="btn" style="background:#292b2c" >
             <a href="#Indicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
             </a>
         </button>
-        <button id='next' class="btn btn-danger">
+        <button id='next' class="btn" style="background:#292b2c">
           <a  href="#Indicators" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>

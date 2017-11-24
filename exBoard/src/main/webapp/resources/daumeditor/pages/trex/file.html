@@ -12,12 +12,12 @@
 <script type="text/javascript">
 // <![CDATA[
 	function insertData(result){
-		
+		console.log("fileInsert 결과",result);
 		var _mockdata = {
 				'attachurl': 'http://127.0.0.1:8081/board/displayOct?fileName='+result[0].src,
 				'filemime': result[0].mimeType,
-				'filename': result[0].src,
-				'filesize': 640
+				'filename': result[0].originName,
+				'filesize': result[0].fileSize
 			};
 		
 			execAttach(_mockdata);

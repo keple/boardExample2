@@ -30,6 +30,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 	@Override
 	public List<BoardVO> getBoardList(Criteria cri) {
 		// TODO Auto-generated method stub
+		logger.info("결과값을 내놔라"+boardDAO.getList(cri));
 		return boardDAO.getList(cri);
 	}
 

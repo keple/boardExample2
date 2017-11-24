@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,11 +14,13 @@ import org.apache.log4j.Logger;
 import org.exBoard.domain.BoardVO;
 import org.exBoard.domain.Criteria;
 import org.exBoard.domain.FileDTO;
+import org.exBoard.domain.FileInfoDomain;
 import org.exBoard.domain.FileVO;
 import org.exBoard.domain.Pager;
 import org.exBoard.domain.ReplyVO;
 import org.exBoard.service.ExBoardService;
 import org.exBoard.util.DaumEditorMimeMap;
+import org.exBoard.util.FileInfoProvider;
 import org.exBoard.util.FileUtil;
 import org.exBoard.util.FileWrapper;
 import org.exBoard.util.MediaUtil;
@@ -35,6 +38,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/board")
@@ -161,7 +169,11 @@ public class BoardController {
 				if(file[i].getSize()!=0){
 					String type=file[i].getOriginalFilename().substring(file[i].getOriginalFilename().lastIndexOf(".")+1);
 					logger.info("이름이모니 :"+file[i].getOriginalFilename());
-					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, file[i].getOriginalFilename(), file[i].getBytes()),file[i].getOriginalFilename(),DaumEditorMimeMap.getMediaType(type)));
+					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, 
+									file[i].getOriginalFilename(), file[i].getBytes()),
+									file[i].getOriginalFilename(),
+									DaumEditorMimeMap.getMediaType(type),
+									file[i].getSize()));
 					
 				}
 				
@@ -248,5 +260,23 @@ public class BoardController {
 		logger.info("content내용 이다" + "\t"+vo);
 		logger.info("우린예전에 끝났어"+dto);
 		return boardService.insertBoard(vo, dto);
+	}
+	@PostMapping("/fileInfo")
+	@ResponseBody
+	public ResponseEntity<List<FileWrapper>> getFileInfo(@RequestParam("data")String domains) throws JsonParseException, JsonMappingException, IOException{
+		ObjectMapper mapper = new ObjectMapper();
+			logger.info(domains);
+			HttpHeaders headers = new HttpHeaders();
+	
+			Collection<FileInfoDomain> domainList = new ObjectMapper().readValue(domains, new TypeReference<Collection<FileInfoDomain>>() { });
+			logger.info("제이슨파싱"+domainList);
+			try{
+				FileInfoProvider provider = new FileInfoProvider(domainList);
+				
+				return new ResponseEntity<List<FileWrapper>>(provider.getFileInfo(),headers,HttpStatus.OK);
+			}catch(Exception e){
+				return new ResponseEntity<List<FileWrapper>>(HttpStatus.BAD_REQUEST);
+			}
+			
 	}
 }

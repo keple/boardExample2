@@ -30,19 +30,19 @@ var successFunctions = (function(){
 		var buttons = [];
 		if(result.prev==true){
 
-			buttons.push({num:"<<",className:'btn btn-primary'});
+			buttons.push({num:"<<",className:'btn btn-primary btn-sm'});
 			
 		}
 		for(i=result.start;i<=result.end;i++){
 			if(i==option.currentPage){
-				buttons.push({num:i+'',className:'btn btn-danger'});
+				buttons.push({num:i+'',className:'btn btn-info btn-sm'});
 			}else{
-				buttons.push({num:i+'',className:'btn btn-primary'});
+				buttons.push({num:i+'',className:'btn btn-primary btn-sm' });
 			}
 			
 		}
 		if(result.next==true){
-			buttons.push({num:">>",className:'btn btn-primary'})
+			buttons.push({num:">>",className:'btn btn-primary btn-sm'})
 			
 		
 		}

@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+.slowFly-in{
+	-webkit-animation:slowFlyIn;
+	-webkit-animation-duration:3000ms;
+	
+}
+@-webkit-keyframes slowFlyIn{
+	0%{
+		-webkit-transform: scale(7) rotate(-180deg) translateY(200%);
+		-opacity:0.3;
+		z-index:999;
+	
+	}
+	25%{
+		-webkit-transform scale(6) rotate(-270deg)translateY(200%);
+		opacity:0.3;
+		z-index:999;
+	}
+	50%{
+		-webkit-transform scale(6) rotate(-360deg) translateY(150%);
+		opacity:0.3;
+		z-index:999;
+	}
+	100%{ 
+		-webkit-transform scale(1) rotate(-540deg) translateY(100%);
+		opacity:1;
+		z-index:0;
+	}
+	
+}

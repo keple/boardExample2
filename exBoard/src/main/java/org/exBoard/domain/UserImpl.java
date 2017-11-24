@@ -19,9 +19,8 @@ public class UserImpl implements UserDetails {
 		// TODO Auto-generated method stub
 		authList = new ArrayList<>();
 		
-		if(this.role.equals("user")||this.role==null){
-			authList.add(new SimpleGrantedAuthority("ROLE_USER"));
-		}else{
+		authList.add(new SimpleGrantedAuthority("ROLE_USER"));
+		if(this.role.equals("admin")||this.role==null){
 			authList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 		}
 		return authList;

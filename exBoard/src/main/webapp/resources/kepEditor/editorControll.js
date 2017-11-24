@@ -1,4 +1,29 @@
 var EditControll = (function(){
+	//setTarget 추가?
+	var scanObj = {
+			myImg:{fn:function(template,data){
+				return template({data:$(data).attr('data-compare')});
+				},
+				target:'img'
+			},
+			daumImg:{fn:function(template,data){
+				return template({data:data.src.substring(data.src.indexOf("=")+1)});
+				},
+				target:'.txc-image'
+			},
+			myLink:{fn:function(template,data){
+				return template({data:$(data).attr('data-name')});
+				},
+				target:'a'
+			},
+			daumLink:{fn:function(template,data){
+				return template({data:data.href.substring(data.href.indexOf("=")+1)});
+				},
+				target:'a'
+			}
+	};
+	
+	
 	var chain = function(){
 		var target = $("#regSec");
 		
@@ -25,48 +50,31 @@ var EditControll = (function(){
 		
 		return this;
 	}
-	var scanElement = function(contentDiv,downConDiv,formId){
-		var imgContentArr = contentDiv.find('img');
+	var scanElement = function(contentDiv,downConDiv,selector){
+		var imgContentArr = $("#"+contentDiv).find(scanObj[selector+"Img"].target);
 		console.log('이미지콘텐츠',imgContentArr);
-		var downContentArr = downConDiv.find('a');
+		var downContentArr = $("#"+downConDiv).find(scanObj[selector+"Link"].target);
+		
+		
+		return {imgArr:imgContentArr,fileArr:downContentArr};
+	};
+	var setElementToContent = function(imgArr,fileArr,formId,selector){
 		var source = $('#formInput').html();
 		var template = Handlebars.compile(source);
 		var html;
-		Array.prototype.forEach.call(imgContentArr,function(src,index){
+		Array.prototype.forEach.call(imgArr,function(src,index){
 			console.log('$src.src',$(src).attr('data-compare'));
-			html = template({data:$(src).attr('data-compare')});
+			html = scanObj[selector+"Img"].fn(template,src);
 			
 			$('#'+formId).append(html);
 			
-		})
-		Array.prototype.forEach.call(downContentArr,function(src,index){
-			html = template({data:$(src).attr('data-name')});
+		});
+		Array.prototype.forEach.call(fileArr,function(src,index){
+			html = scanObj[selector+"Link"].fn(template,src);
 			
 			$('#'+formId).append(html);
-		})
-	}
-	var scanElementForDaumEditor = function(contentDiv,formId){
-		var imgContentArr = contentDiv.find('img');
-		console.log('이미지콘텐츠',imgContentArr);
-		var downContentArr = contentDiv.find('a');
-		var source = $('#formInput').html();
-		var template = Handlebars.compile(source);
-		var html;
-		Array.prototype.forEach.call(imgContentArr,function(src,index){
-			console.log('$src.src',$(src).attr('data-compare'));
-			html = template({data:src.src.substring(src.src.indexOf('=')+1)});
-			
-			$('#'+formId).append(html);
-			
-		})
-		Array.prototype.forEach.call(downContentArr,function(src,index){
-			html = template({data:src.href.substring(src.href.indexOf("=")+1)});
-			
-			$('#'+formId).append(html);
-		})
-		
-		
-	}
+		});
+	};
 
 	var initiateAniContent = function(objArr){
 		console.log("ani",AnimationManager);
@@ -74,7 +82,7 @@ var EditControll = (function(){
 			
 			AnimationManager.addObject(src[0]);
 		});
-	}
+	};
 	var deleteImg = function(obj){
 		var imgFiles = obj.targetDiv.find('fWrapper');
 		
@@ -98,6 +106,6 @@ var EditControll = (function(){
 			scanElement:scanElement,
 			deleteImg:deleteImg,
 			downContentdelEvent:downContentdelEvent,
-			scanElementForDaumEditor:scanElementForDaumEditor}
+			setElementToContent:setElementToContent}
 	
 })();

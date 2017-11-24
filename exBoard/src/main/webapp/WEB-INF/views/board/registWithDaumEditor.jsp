@@ -10,11 +10,12 @@
 <script src="/resources/utils/mimeType.js"></script>
   <script type="text/javascript" src="/resources/kepEditor/editorControll.js"></script>
 <script src="/resources/daumeditor/js/editor_creator.js"></script>
-<section id="regSec"class="content">
-	<div id= "wrapDiv">
+<script src="/resources/utils/QueryToServer.js"></script>
+<section id="regSec" class="content"style="background:#ffffff">
+	<div id= "wrapDiv" class="row">
 		<form name="regForm" id="regForm">
 		<c:if test= "${!empty board.bno}">
-				<input type="hidden" name="bno" id="bno" value='${board.bno}'></input>
+				<input type="hidden" name="bno" id="bno" value='${board.bno}' onload="customLoading()"></input>
 			</c:if>
 			 <!-- text input -->
 			 <!-- 제목  -->
@@ -87,6 +88,7 @@
 </section>
 <script>
 $(document).ready(function(){
+	
 	$.ajax({
 		url:'/resources/daumeditor/editor_frame.html',
 		success:function(result){
@@ -137,7 +139,10 @@ $(document).ready(function(){
 				};
 		
 					new Editor(config);
+					
+					
 				}
+	
 	});
 
 	function validForm(editor) {
@@ -163,7 +168,9 @@ $(document).ready(function(){
 			if(validForm(Editor)){
 				var content = Editor.getContent();
 				$("#editContent").html(content);
-				EditControll.scanElementForDaumEditor($('#editContent'),'regForm');
+				//jquery element,jquery element,string,string
+				var tempObj = EditControll.scanElement('editContent','editContent','daum');
+				EditControll.setElementToContent(tempObj.imgArr,tempObj.fileArr,'regForm','daum');
 				$("#realCon").text(content);
 				var formData = $("#regForm").serialize();
 				new urlMaker(new pageChanger(),"/board/registWithEditor",false).makeUrl()
@@ -182,8 +189,8 @@ $(document).ready(function(){
     		var $content=Editor.getContent();
     		$("#filehelperDiv").html($content);
     		$("#realCon").text($content);
-    		EditControll.scanElementForDaumEditor($('#filehelperDiv'),'regForm');
-    		
+    		var tempObj = EditControll.scanElement('filehelperDiv','filehelperDiv','daum');
+    		EditControll.setElementToContent(tempObj.imgArr,tempObj.fileArr,'regForm','daum');
     		
     		var formData = $("#regForm").serialize();
     		new urlMaker(new pageChanger(),"/board/update",false).makeUrl()
@@ -204,78 +211,15 @@ $(document).ready(function(){
 		
 </script>
 <script type="text/javascript">
-	function scanElementForEditor(helperDiv){
-		var classifyImage = $("#"+helperDiv).find(".txc-image");
-		var classifyFile = $("#"+helperDiv).find('a');
-		console.log("classifyArr",classifyImage);
-		console.log("classifyArr",classifyFile);
-		Array.prototype.forEach.call(classifyImage,function(src,index){
-			console.log("원본",src);
-			
-			
-			
-			
-		});
-		Array.prototype.forEach.call(classifyFile,function(src,index){
-			console.log("파일형 원본",src);
-			
-			
-		});
-		return {imgArr:classifyImage,fileArr:classifyFile}
+	//update시에 사용할 함수
 
-	}
-	function loadContent() {
-		var obj = scanElementForEditor('filehelperDiv');
-		
-		var attachments = {};
-		
-		attachments['image'] = [];
-		Array.prototype.forEach.call(obj.imgArr,function(src,index){
-			
-			attachments['image'].push({
-				'attacher': 'image',
-				'data': {
-					'imageurl': src.src,
-					'filename': src.src.substring(src.src.lastIndexOf("_")+1),
-					'originalurl': src.src,
-					'thumburl': src.src.replace("_","s_"),
-					'filesize':200
-				}
-				
-	
-			});
-		
-		});
-	
-		attachments['file'] = [];
-		Array.prototype.forEach.call(obj.fileArr,function(src,index){
-			
-			attachments['file'].push({
-				'attacher': 'file',
-				'data': {
-					'attachurl': src.href,
-					'filemime': MimeType.getMime(src.href.substring(src.href.lastIndexOf('.')+1)),
-					'filename': src.href.substring(src.href.lastIndexOf('_')+1),
-					'filesize':600
-				}
-			});
-		});
-		
-		
-		/* 저장된 컨텐츠를 불러오기 위한 함수 호출 */
-		Editor.modify({
-			"attachments": function () { /* 저장된 첨부가 있을 경우 배열로 넘김, 위의 부분을 수정하고 아래 부분은 수정없이 사용 */
-				var allattachments = [];
-				for (var i in attachments) {
-					allattachments = allattachments.concat(attachments[i]);
-				}
-				return allattachments;
-			}(),
-			"content": document.getElementById("realCon") /* 내용 문자열, 주어진 필드(textarea) 엘리먼트 */
-		});
+	function customLoading(){
+		var obj = EditControll.scanElement('filehelperDiv','filehelperDiv','daum');
+		console.log("오브젝트 잘못나옴?",obj);
+		var transAr = QueryToServer.makeObject.initFn(obj.imgArr,obj.fileArr);
+		QueryToServer.findFileInfo.initFn(transAr);
 	}
 	
-	loadContent();
 	
 </script>
 <%@include file="../include/footer.jsp" %>

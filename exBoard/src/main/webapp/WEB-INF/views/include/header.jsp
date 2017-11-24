@@ -71,7 +71,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 
-<div class="wrapper">
+<div class="wrapper" style="background-image: z-index:999;">
 
   <header class="main-header">
     <!-- Logo -->
@@ -467,6 +467,6 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="min-height:901px">
+  <div class="content-wrapper" style="min-height:901px;background-image:url('http://127.0.0.1:8081/board/display?fileName=snow.gif');background-size: cover;">
 
 

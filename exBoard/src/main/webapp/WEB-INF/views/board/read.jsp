@@ -8,6 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@include file="../include/header.jsp" %>
 <script src="/resources/kepEditor/helper.js"></script>
+<link rel="stylesheet" href="/resources/css/read.css" type="text/css"/>
 <style>
 
 #comment{
@@ -102,6 +103,10 @@
 <script src = "/resources/js/read.js"></script>
 <script>
 $(document).ready(function(){
+	$(".content").addClass("slowFly-in");
+	$(".content").on("webkitAnimationEnd",function(e){
+		$(this).removeClass("slowFly-in");
+	});
 	
 	//댓글등록
 	var um = new urlMaker(new pageChanger());

@@ -10,7 +10,13 @@ var MimeType=(function(){
 	var getMime = function(type){
 		
 		return mime[type.toUpperCase()];
+	};
+	var getMimeWithName = function(fileName){
+		var temp = fileName.substring(fileName.lastIndexOf(".")+1);
+		
+		return mime[temp.toUpperCase()];
+	};
+	return {getMime:getMime,
+			getMimeWithName:getMimeWithName
 	}
-
-	return {getMime:getMime}
 })();

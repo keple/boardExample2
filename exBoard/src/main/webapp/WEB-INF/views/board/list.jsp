@@ -5,6 +5,7 @@
 <link rel='stylesheet' href="/resources/css/list.css">
     <!-- Content Header (Page header) -->
    <!-- TABLE: LATEST ORDERS -->
+   <div id="aniDiv">
           <div class="box box-info">
           
             <div class="box-header with-border">
@@ -33,9 +34,16 @@
                     <td><a>${list.bno}</a></td>
                     <td class="readLink">
                     <a class="hv">${list.title}</a>
-                   	<span class="label label-warning">${list.replyCount}</span>
+                   	<span class="label label-default">${list.replyCount}</span>
                     </td>
-                    <td><span class="label label-success">${list.writer}</span></td>
+                    <c:choose>
+                    	<c:when test="${list.role eq 'user'}">
+                    		<td><span class="label label-success">${list.writer}</span></td>
+                    	</c:when>
+                    	<c:when test="${list.role eq 'admin'}">
+                    		<td><span class="label label-warning">${list.writer}</span></td>
+                    	</c:when>
+                    </c:choose>
                     <td>
                       <div class="sparkbar" data-color="#00a65a" data-height="20">${list.viewcount}</div>
                     </td>
@@ -76,14 +84,17 @@
                 <input id="keyword" type="text" value="${criteria.keyword}"></input>
                 <button id="searchBtn"class="btn btn-success"><i class="fa fa-search" aria-hidden="true"></i></button>
 		</div>
-          <!-- /.box -->
-
-        <!-- /.col -->
-	
-
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	</div>
 <script>
+
   $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script>
+
+$("#aniDiv").addClass("slowFly-in");
+$("#aniDiv").on("webkitAnimationEnd",function(e){
+	$(this).removeClass("slowFly-in");
+});
 </script>
 <script>
 $(document).ready(function(){
@@ -185,6 +196,7 @@ $(document).ready(function(){
 	});
 
 });
+
 </script>
 
 

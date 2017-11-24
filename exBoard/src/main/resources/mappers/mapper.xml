@@ -29,15 +29,20 @@
   	
   	
   	<select id="boardList" parameterType="Criteria" resultType="BoardVO">
-  		select board.bno,board.title,board.content,board.writer,board.regdate,board.viewcount,count(rno) replyCount 
+  		select repBoard.bno,repBoard.title,repBoard.content,repBoard.writer,repBoard.regdate,repBoard.viewcount,repBoard.replyCount,tbl_user.role
   		from(
-  			select * from tbl_board 
-  		<include refid="search"></include>
-  			order by bno desc limit #{skip}, #{size}
-  		)board left outer join tbl_reply
-  		on board.bno = tbl_reply.bno
-  		group by board.bno
-  		order by bno desc
+  			select board.bno,board.title,board.content,board.writer,board.regdate,board.viewcount,count(rno) replyCount 
+  			from(
+  				select * from tbl_board 
+  			<include refid="search"></include>
+  				order by bno desc limit #{skip}, #{size}
+  			)board left outer join tbl_reply
+  			on board.bno = tbl_reply.bno
+			group by board.bno
+			
+        )repBoard ,tbl_user
+        where repBoard.writer = tbl_user.userid
+        order by repBoard.bno desc
   		
   	</select>
   	

@@ -10,6 +10,7 @@ public class BoardVO {
 	private Timestamp regdate,updatedate;
 	private Integer viewcount;
 	private Integer replyCount;
+	private String role;
 	public Integer getBno() {
 		return bno;
 	}
@@ -59,12 +60,19 @@ public class BoardVO {
 	public void setReplyCount(Integer replyCount) {
 		this.replyCount = replyCount;
 	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
 	@Override
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
 				+ regdate + ", updatedate=" + updatedate + ", viewcount=" + viewcount + ", replyCount=" + replyCount
-				+ "]";
+				+ ", role=" + role + "]";
 	}
+	
 	
 	
 	
