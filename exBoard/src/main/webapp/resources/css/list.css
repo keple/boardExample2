@@ -39,6 +39,12 @@
 	-webkit-animation-duration:3000ms;
 	
 }
+
+tr {
+   line-height: 50px;
+   min-height: 50px;
+   height: 50px;
+}
 @-webkit-keyframes slowFlyIn{
 	0%{
 		-webkit-transform: scale(7) rotate(90deg) translateY(200%);

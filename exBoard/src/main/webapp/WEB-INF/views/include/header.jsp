@@ -467,6 +467,6 @@
   </aside>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" style="min-height:901px;background-image:url('http://127.0.0.1:8081/board/display?fileName=snow.gif');background-size: cover;">
+  <div class="content-wrapper" style="min-height:901px;height:100%;background-image:url('http://127.0.0.1:8081/board/display?fileName=snow.gif');background-size: cover;">
 
 

@@ -5,8 +5,8 @@
 <link rel='stylesheet' href="/resources/css/list.css">
     <!-- Content Header (Page header) -->
    <!-- TABLE: LATEST ORDERS -->
-   <div id="aniDiv">
-          <div class="box box-info">
+   <div id="aniDiv" style="min-height:901px;">
+          <div class="box box-info"style="min-height:800px;">
           
             <div class="box-header with-border">
               <h3 class="box-title">게시판</h3>
@@ -16,7 +16,7 @@
             
             
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body" style="min-height:600px;">
               <div class="table-responsive">
                 <table id="board_table"class="table no-margin">
                   <thead>
@@ -58,7 +58,7 @@
             
             
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
+            <div class="box-footer clearfix" style="height:10%;">
             	<div id=pagination class="btn-group" style="margin-left:25%;margin-right:25%">
 					            	
             	
