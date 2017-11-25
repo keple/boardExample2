@@ -91,9 +91,9 @@
 </script>
 <script>
 
-$("#aniDiv").addClass("slowFly-in");
+$("#aniDiv").addClass("fly-content");
 $("#aniDiv").on("webkitAnimationEnd",function(e){
-	$(this).removeClass("slowFly-in");
+	$(this).removeClass("fly-content");
 });
 </script>
 <script>

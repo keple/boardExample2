@@ -2,22 +2,22 @@ var EditControll = (function(){
 	//setTarget 추가?
 	var scanObj = {
 			myImg:{fn:function(template,data){
-				return template({data:$(data).attr('data-compare')});
+				return template({data:decodeURI($(data).attr('data-compare'))});
 				},
 				target:'img'
 			},
 			daumImg:{fn:function(template,data){
-				return template({data:data.src.substring(data.src.indexOf("=")+1)});
+				return template({data:decodeURI(data.src.substring(data.src.indexOf("=")+1))});
 				},
 				target:'.txc-image'
 			},
 			myLink:{fn:function(template,data){
-				return template({data:$(data).attr('data-name')});
+				return template({data:decodeURI($(data).attr('data-name'))});
 				},
 				target:'a'
 			},
 			daumLink:{fn:function(template,data){
-				return template({data:data.href.substring(data.href.indexOf("=")+1)});
+				return template({data:decodeURI(data.href.substring(data.href.indexOf("=")+1))});
 				},
 				target:'a'
 			}
@@ -52,7 +52,7 @@ var EditControll = (function(){
 	}
 	var scanElement = function(contentDiv,downConDiv,selector){
 		var imgContentArr = $("#"+contentDiv).find(scanObj[selector+"Img"].target);
-		console.log('이미지콘텐츠',imgContentArr);
+		
 		var downContentArr = $("#"+downConDiv).find(scanObj[selector+"Link"].target);
 		
 		
@@ -63,7 +63,7 @@ var EditControll = (function(){
 		var template = Handlebars.compile(source);
 		var html;
 		Array.prototype.forEach.call(imgArr,function(src,index){
-			console.log('$src.src',$(src).attr('data-compare'));
+			
 			html = scanObj[selector+"Img"].fn(template,src);
 			
 			$('#'+formId).append(html);

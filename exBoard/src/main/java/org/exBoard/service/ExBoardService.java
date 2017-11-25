@@ -11,9 +11,9 @@ import org.exBoard.domain.ReplyVO;
 
 public interface ExBoardService {
 	public List<BoardVO> getBoardList(Criteria cri);
-	public String insertBoard(BoardVO vo,FileDTO dto);
+	public String insertBoard(BoardVO vo,FileDTO dto) throws Exception;
 	public String deleteBoard(Integer no);
-	public String updateBoard(BoardVO vo,FileDTO dto);
+	public String updateBoard(BoardVO vo,FileDTO dto) throws Exception;
 	public Integer getTotal();
 	public BoardVO getBoard(Integer bno);
 	public String insertReply(ReplyVO rvo);

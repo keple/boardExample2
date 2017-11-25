@@ -1,5 +1,6 @@
 package org.exBoard.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,7 +37,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 
 	@Override
 	@Transactional
-	public String insertBoard(BoardVO vo,FileDTO dto) {
+	public String insertBoard(BoardVO vo,FileDTO dto) throws Exception {
 		// TODO Auto-generated method stub
 		
 		String msg = MsgMap.getInstance().getMessage(boardDAO.insert(vo));
@@ -47,7 +48,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 		fvo.setBno(pri);
 		for(String name:dto.getFileNames()){
 			if(name.trim()!=""){
-				fvo.setFileName(name);
+				fvo.setFileName(new String(name.getBytes(),"UTF-8"));
 				fileDAO.insert(fvo);
 			}
 		}
@@ -65,7 +66,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 
 	@Override
 	@Transactional
-	public String updateBoard(BoardVO vo,FileDTO dto) {
+	public String updateBoard(BoardVO vo,FileDTO dto) throws Exception {
 		// TODO Auto-generated method stub
 		String msg =MsgMap.getInstance().getMessage(boardDAO.update(vo));
 		//아.. 이방법은 안쓰고 싶은데
@@ -73,8 +74,9 @@ public class ExBoardServiceImpl implements ExBoardService {
 		fileDAO.deleteAllFromBoard((vo.getBno()));
 		FileVO fvo = new FileVO();
 		for(String s:dto.getFileNames()){
+		
 			if(s.trim()!=""){
-				fvo.setFileName(s);
+				fvo.setFileName(new String(s.getBytes(),"UTF-8"));
 				fvo.setBno(vo.getBno());
 				fileDAO.insert(fvo);	
 			}

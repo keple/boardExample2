@@ -3,6 +3,7 @@ package org.exBoard.web;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -67,9 +68,6 @@ public class BoardController {
 				typeArr[i] = cri.getType().substring(i, i + 1);
 			}
 			cri.setTypes(typeArr);
-
-		
-		
 		model.addAttribute("boardList", boardService.getBoardList(cri));
 		
 		
@@ -89,11 +87,19 @@ public class BoardController {
 	}
 	@PostMapping(value = "/register", produces="application/text;charset=utf8")
 	@ResponseBody
-	public String getRegistForm(BoardVO vo,FileDTO dto){
+	public String getRegistForm(BoardVO vo,FileDTO dto) throws UnsupportedEncodingException{
 		logger.info(vo);
 		logger.info(dto);
-		return boardService.insertBoard(vo,dto);
-		
+		logger.info("뉴스트링"+new String(dto.getFileNames().get(0).getBytes(),"UTF-8"));
+		String msg = null;
+		try {
+			msg = boardService.insertBoard(vo,dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+		return msg;
 	}
 	
 	
@@ -154,34 +160,42 @@ public class BoardController {
 	@ResponseBody
 	public String updateBoard(BoardVO vo,FileDTO dto){
 		logger.info("vo는뭐니"+vo+"\n"+"DTO는 : "+dto);
-		return boardService.updateBoard(vo,dto);
+		String msg = null;
+		
+		try {
+			msg =boardService.updateBoard(vo,dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return msg;
 	}
 	@PostMapping(value = "/fileUpload")
 	@ResponseBody
 	public ResponseEntity<List<FileWrapper>> fileUpload(@RequestParam("files[]")MultipartFile[] file){
 		
 		List<FileWrapper> fileNames = new ArrayList<>();
-		logger.info(file[0].getOriginalFilename());
+		
 		String tempPath = FileUtil.calcPath(uploadPath);
-		logger.info("what is path"+tempPath);
+		
 		try{
 			for(int i=0;i<file.length;i++){
 				if(file[i].getSize()!=0){
 					String type=file[i].getOriginalFilename().substring(file[i].getOriginalFilename().lastIndexOf(".")+1);
 					logger.info("이름이모니 :"+file[i].getOriginalFilename());
 					fileNames.add(new FileWrapper(FileUtil.uploadFile(uploadPath, 
-									file[i].getOriginalFilename(), file[i].getBytes()),
-									file[i].getOriginalFilename(),
+									new String(file[i].getOriginalFilename().getBytes(),"UTF-8"), file[i].getBytes()),
+									new String(file[i].getOriginalFilename().getBytes(),"UTF-8"),
 									DaumEditorMimeMap.getMediaType(type),
 									file[i].getSize()));
 					
-				}
+				};
 				
-			}
+			};
 		}catch(Exception e){
 			
-		}
-		
+		};
+		logger.info("한글깨짐?"+fileNames);
 		
 		return new ResponseEntity<>(fileNames,HttpStatus.OK);
 		
@@ -254,14 +268,22 @@ public class BoardController {
 		return "/board/registWithDaumEditor";
 	}
 	
-	@PostMapping("/registWithEditor")
+	@PostMapping(value="/registWithEditor", produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String register2Post(BoardVO vo,FileDTO dto){
+	public String register2Post(BoardVO vo,FileDTO dto) throws UnsupportedEncodingException{
 		logger.info("content내용 이다" + "\t"+vo);
 		logger.info("우린예전에 끝났어"+dto);
-		return boardService.insertBoard(vo, dto);
+		logger.info("뉴스트링"+new String(dto.getFileNames().get(0).getBytes(),"UTF-8"));
+		String msg=null;
+				try {
+					msg = boardService.insertBoard(vo, dto);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return msg;
 	}
-	@PostMapping("/fileInfo")
+	@PostMapping(value = "/fileInfo" , produces="application/json")
 	@ResponseBody
 	public ResponseEntity<List<FileWrapper>> getFileInfo(@RequestParam("data")String domains) throws JsonParseException, JsonMappingException, IOException{
 		ObjectMapper mapper = new ObjectMapper();

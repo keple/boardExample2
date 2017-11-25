@@ -1,6 +1,5 @@
 package org.exBoard.domain;
 
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class FileInfoDomain {

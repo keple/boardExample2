@@ -26,10 +26,10 @@ public class FileInfoProvider {
 			FileWrapper temp = new FileWrapper();
 			File fi = new File("D:\\zzz\\"+f.getFileSrc().substring(f.getFileSrc().indexOf("=")+1));
 			
-			temp.setOriginName(fi.getName());
+			temp.setOriginName(new String(fi.getName().getBytes(),"UTF-8"));
 			temp.setFileSize(fi.length());
-			temp.setMimeType(f.getValue());
-			temp.setSrc(f.getFileSrc());
+			temp.setMimeType(new String(f.getValue().getBytes(),"UTF-8"));
+			temp.setSrc(new String(f.getFileSrc().getBytes(),"UTF-8"));
 			wrapperList.add(temp);
 		}
 		

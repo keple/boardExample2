@@ -13,9 +13,9 @@
 <script src="/resources/utils/QueryToServer.js"></script>
 <section id="regSec" class="content"style="background:#ffffff">
 	<div id= "wrapDiv" class="row">
-		<form name="regForm" id="regForm">
+		<form name="regForm" id="regForm" accept-charset="UTF-8">
 		<c:if test= "${!empty board.bno}">
-				<input type="hidden" name="bno" id="bno" value='${board.bno}' onload="customLoading()"></input>
+				<input type="hidden" name="bno" id="bno" value='${board.bno}'></input>
 			</c:if>
 			 <!-- text input -->
 			 <!-- 제목  -->
@@ -167,12 +167,14 @@ $(document).ready(function(){
         	
 			if(validForm(Editor)){
 				var content = Editor.getContent();
+				console.log("EditorContent",content);
 				$("#editContent").html(content);
-				//jquery element,jquery element,string,string
 				var tempObj = EditControll.scanElement('editContent','editContent','daum');
+				
 				EditControll.setElementToContent(tempObj.imgArr,tempObj.fileArr,'regForm','daum');
 				$("#realCon").text(content);
 				var formData = $("#regForm").serialize();
+				console.log("korean",formData);
 				new urlMaker(new pageChanger(),"/board/registWithEditor",false).makeUrl()
 				 															   .getPageChanger()
 				 															   .setType("post")
@@ -204,8 +206,14 @@ $(document).ready(function(){
     	if(RegistPage.isEnterForUpdate($title)){
     		
     		var $bno = $("#bno").val();
+    		customLoading();
     		
     	}
+    	
+    	
+    	
+    	
+    	
 });
 
 		
@@ -214,6 +222,7 @@ $(document).ready(function(){
 	//update시에 사용할 함수
 
 	function customLoading(){
+		console.log("실행?");
 		var obj = EditControll.scanElement('filehelperDiv','filehelperDiv','daum');
 		console.log("오브젝트 잘못나옴?",obj);
 		var transAr = QueryToServer.makeObject.initFn(obj.imgArr,obj.fileArr);
