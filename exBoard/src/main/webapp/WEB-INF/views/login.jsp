@@ -8,7 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
+	<meta  name="csrf_token" content="${_csrf.token}">
+    <meta  name="_csrf_header" content="${_csrf.headerName}">
     <title>DASHGUM - Bootstrap Admin Template</title>
 
     <!-- Bootstrap core CSS -->
@@ -37,6 +38,7 @@
 	  	<div class="container">
 	  	
 		      <form class="form-login" action="/j_spring_security_check" method="post">
+		      <input type="hidden" name="_csrf" value="${_csrf.token}">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" name="j_username"placeholder="User ID" autofocus>

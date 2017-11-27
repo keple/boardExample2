@@ -38,7 +38,7 @@ var pageChanger = (function(){
 	if(typeof this.processData!="undefined"){
 		temp.processData=this.processData;
 	}
-	console.log(temp);
+	console.log("ajaxProperties",temp);
 	
 	$.ajax(temp);
 	};
@@ -73,6 +73,14 @@ var pageChanger = (function(){
 		this.data = data;
 		return this;
 	};
+	pageChanger.prototype.setHeader = function(headerName,headerValue){
+	
+		var obj = {};
+		obj[headerName] = headerValue;
+		this.header = obj;
+
+		return this;
+	}
 	pageChanger.prototype.setFileMode = function(opt){
 		this.processData=false;
 	    this.contentType=false;

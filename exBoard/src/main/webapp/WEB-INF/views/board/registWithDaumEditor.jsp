@@ -80,6 +80,7 @@
          				</a>
          			</c:otherwise>
          		</c:choose>
+         		<input type="hidden" name="_csrf" value="${_csrf.token}">
 		</form>
 		
        
@@ -174,10 +175,10 @@ $(document).ready(function(){
 				EditControll.setElementToContent(tempObj.imgArr,tempObj.fileArr,'regForm','daum');
 				$("#realCon").text(content);
 				var formData = $("#regForm").serialize();
-				console.log("korean",formData);
 				new urlMaker(new pageChanger(),"/board/registWithEditor",false).makeUrl()
 				 															   .getPageChanger()
 				 															   .setType("post")
+				 															   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 				 															   .setSuccess(successFunctions.registSuccess)
 				 															   .setData(formData)
 				 															   .callAjax();
@@ -198,6 +199,7 @@ $(document).ready(function(){
     		new urlMaker(new pageChanger(),"/board/update",false).makeUrl()
     															 .getPageChanger()
     															 .setType("post")
+    															 .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
     															 .setSuccess(successFunctions.registSuccess)
     															 .setData(formData)
     															 .callAjax();

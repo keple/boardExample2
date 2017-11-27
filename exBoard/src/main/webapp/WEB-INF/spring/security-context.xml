@@ -43,7 +43,7 @@
 	
 		<!-- enable csrf protection -->
 		 
-		<csrf disabled="true"></csrf>   
+		<csrf></csrf>   
 
 	</http> 
 

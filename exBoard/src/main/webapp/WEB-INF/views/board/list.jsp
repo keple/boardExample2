@@ -41,7 +41,7 @@
                     		<td><span class="label label-success">${list.writer}</span></td>
                     	</c:when>
                     	<c:when test="${list.role eq 'admin'}">
-                    		<td><span class="label label-warning">${list.writer}</span></td>
+                    		<td><image src="/resources/img/crown.png">&nbsp;&nbsp;</image><span class="label label-danger">${list.writer}</span></td>
                     	</c:when>
                     </c:choose>
                     <td>
@@ -91,13 +91,15 @@
 </script>
 <script>
 
-$("#aniDiv").addClass("fly-content");
-$("#aniDiv").on("webkitAnimationEnd",function(e){
-	$(this).removeClass("fly-content");
+$("#aniDiv").addClass("fly-OutContent");
+ $("#aniDiv").on("webkitAnimationEnd",function(e){
+	$(this).removeClass("fly-OutContent");
+	
 });
 </script>
 <script>
 $(document).ready(function(){
+
 	var um = new urlMaker(new pageChanger(),'/board/pager'),
 	 	$newButton = $("#newBoard"),
 	 	$curpage = ${criteria.pageNum},
@@ -135,6 +137,7 @@ $(document).ready(function(){
 	$("#pagination").on("click","#pBtn",function(e){
 		e.stopPropagation();
 		e.preventDefault();
+		var	$keyword = $("#keyword").val().trim()==""?"x":$("#keyword").val();
 		var page = this.innerText;
 		var newStart;
 		console.log(page);
@@ -158,6 +161,8 @@ $(document).ready(function(){
 		}
 		tempUrl.setParam('pageNum',page,1)
 			   .setParam('size',$viewSize,1)
+			   .setParam('type',$('.type').val())
+			   .setParam('keyword',$keyword)
 		       .makeUrl()
 		       .getPageChanger().redirect();
 		

@@ -271,9 +271,8 @@ public class BoardController {
 	@PostMapping(value="/registWithEditor", produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String register2Post(BoardVO vo,FileDTO dto) throws UnsupportedEncodingException{
-		logger.info("content내용 이다" + "\t"+vo);
 		logger.info("우린예전에 끝났어"+dto);
-		logger.info("뉴스트링"+new String(dto.getFileNames().get(0).getBytes(),"UTF-8"));
+		
 		String msg=null;
 				try {
 					msg = boardService.insertBoard(vo, dto);

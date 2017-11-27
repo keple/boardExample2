@@ -7,6 +7,8 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
+  <meta  name="csrf_token" content="${_csrf.token}">
+  <meta  name="_csrf_header" content="${_csrf.headerName}">
   <meta charset="utf-8">
   
   <title>ExBaord! |Test</title>
@@ -347,6 +349,9 @@
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        		<span class="sr-only">Toggle navigation</span>
+      		</a>
           <li>
             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
           </li>

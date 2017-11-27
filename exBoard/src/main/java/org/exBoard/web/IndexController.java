@@ -20,4 +20,16 @@ public class IndexController {
 	public void goTestPage(){
 		
 	}
+	@GetMapping("file")
+	public String goFilePage(){
+		
+		
+		return "/daumEditor/file";
+	}
+	@GetMapping("image")
+	public String foImagePage(){
+		
+		
+		return "/daumEditor/image";
+	}
 }

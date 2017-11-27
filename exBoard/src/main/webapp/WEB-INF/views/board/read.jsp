@@ -112,6 +112,9 @@ $(document).ready(function(){
 	var um = new urlMaker(new pageChanger());
 	var $bno = ${option};
 	var defaultPageNum = 1;
+	var pageNum = ${cri.pageNum},
+		type = "${cri.type}",
+		keyword = "${cri.keyword}";
 	//var obj = {pageNum : 1,size : 5,option:$option};
 	readPage.callReplyList({bno:$bno,um:um});
 	readPage.callFileList({bno:$bno,um:new urlMaker()});
@@ -126,6 +129,7 @@ $(document).ready(function(){
 		new urlMaker(new pageChanger()).setDefaultUrl('/board/registReply')
 									   .makeUrl()							   
 									   .getPageChanger()
+									   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 									   .setType('post')
 									   .setSuccess(successFunctions.replySuccess,{fnc:readPage.callReplyList,obj:{bno:$bno,um:um},div:'comments'})
 									   .setFail(failFunctions.replyFail)
@@ -160,11 +164,13 @@ $(document).ready(function(){
 	$("#toList").on('click',function(e){
 		e.stopPropagation();
 		e.preventDefault();
-		new urlMaker(new pageChanger(),"/board/list",true).setParam('pageNum',${cri.pageNum})
-												   .setParam('type',${cri.type})
-												   .setParam('keyword',${cri.keyword})
+		new urlMaker(new pageChanger(),"/board/list",true).setParam('pageNum',pageNum)
+												   .setParam('size',10)
+												   .setParam('type',type)
+												   .setParam('keyword',keyword)
 												   .makeUrl()
 												   .getPageChanger()
+												   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 												   .redirect();
 		
 	});
@@ -182,9 +188,10 @@ $(document).ready(function(){
 		new urlMaker(new pageChanger(),'/board/registWithEditor',true).setParam("bno",$bno)
 															  .makeUrl()
 															  .getPageChanger()
+															  .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 															  .redirect();
 		
-	})
+	});
 });
 
 

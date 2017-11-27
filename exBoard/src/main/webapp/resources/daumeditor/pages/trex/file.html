@@ -3,7 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <title>Daum에디터 - 파일 첨부</title> 
+
+
 <script src="/resources/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="../../js/popup.js" type="text/javascript" charset="utf-8"></script>
   <script src="/resources/utils/urlMaker.js"></script>
@@ -30,8 +33,9 @@
 	        return;
 	    }
 		console.log(fileData);
-		new urlMaker(new pageChanger,'/board/fileUpload',false).makeUrl()
+		new urlMaker(new pageChanger(),'/board/fileUpload',false).makeUrl()
 															   .getPageChanger()
+															   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 															   .setType('post')
 															   .setFileMode()
 															   .setData(fileData)
@@ -57,6 +61,7 @@
 	
 </script>
 </head>
+
 <body onload="initUploader();">
 <div class="wrapper">
 	<div class="header">
@@ -79,5 +84,6 @@
 		</ul>
 	</div>
 </div>
+
 </body>
-</html>
+

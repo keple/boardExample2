@@ -17,10 +17,10 @@ var QueryToServer=(function(mimeType){
 			
 	}
 	function queryFileInfo(args){
-		console.log("답이 뭐냐",args[0]);
 		var dataArr = JSON.stringify(args[0]);
 		new urlMaker(new pageChanger(),'/board/fileInfo',false).makeUrl()
 															   .getPageChanger()
+															   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 															   .setType('post')
 															   .setData({data:dataArr})
 															   .setSuccess(querySuccess)
@@ -38,8 +38,8 @@ var QueryToServer=(function(mimeType){
 				attachments['image'].push({
 					'attacher':'image',
 					'data':{
-						'imageurl':src.src,
-						'filename':src.originName,
+						'imageurl':decodeURI(src.src),
+						'filename':decodeURI(src.originName),
 						'originalurl':src.src,
 						'thumburl':src.src.replace("_","s_"),
 						'filesize':src.fileSize
@@ -51,9 +51,9 @@ var QueryToServer=(function(mimeType){
 				attachments['file'].push({
 					'attacher':'file',
 					'data':{
-						'attachurl':src.src,
+						'attachurl':decodeURI(src.src),
 						'filemime':src.mimeType,
-						'filename':src.originName,
+						'filename':decodeURI(src.originName),
 						'filesize':src.fileSize
 					}
 					
@@ -88,7 +88,6 @@ var QueryToServer=(function(mimeType){
 			
 		});
 		Array.prototype.forEach.call(args[1],function linkCall(src,index){
-			console.log("Link업을텐디?",args[1]);
 			transArr.push({fileSrc:src.href, value:mimeType.getMimeWithName(src.href)});
 		});
 		console.log("병합",transArr);
