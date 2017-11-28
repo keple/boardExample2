@@ -30,7 +30,7 @@ public class CustomUserServiceImpl implements CustomUserService {
 	}
 	@Override
 	public Integer checkUser(String checkString) {
-		// TODO Auto-generated method stub
+		
 		return udao.checkUser(checkString);
 	}
 

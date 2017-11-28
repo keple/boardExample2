@@ -30,8 +30,8 @@ public class ExBoardServiceImpl implements ExBoardService {
 	FileDAOImpl fileDAO;
 	@Override
 	public List<BoardVO> getBoardList(Criteria cri) {
-		// TODO Auto-generated method stub
-		logger.info("결과값을 내놔라"+boardDAO.getList(cri));
+		
+		
 		return boardDAO.getList(cri);
 	}
 
@@ -59,7 +59,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 	@Override
 	
 	public String deleteBoard(Integer no) {
-		// TODO Auto-generated method stub
+		
 
 		return MsgMap.getInstance().getMessage(boardDAO.delete(no));
 	}
@@ -67,10 +67,9 @@ public class ExBoardServiceImpl implements ExBoardService {
 	@Override
 	@Transactional
 	public String updateBoard(BoardVO vo,FileDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+		
 		String msg =MsgMap.getInstance().getMessage(boardDAO.update(vo));
-		//아.. 이방법은 안쓰고 싶은데
-		//처음부터 download링크랑 같이 본문에 넣었어야 하는거같다..
+	
 		fileDAO.deleteAllFromBoard((vo.getBno()));
 		FileVO fvo = new FileVO();
 		for(String s:dto.getFileNames()){
@@ -86,14 +85,14 @@ public class ExBoardServiceImpl implements ExBoardService {
 
 	@Override
 	public Integer getTotal() {
-		// TODO Auto-generated method stub
+
 		return boardDAO.getTotal();
 	}
 
 	@Override
 	@Transactional
 	public BoardVO getBoard(Integer bno) {
-		// TODO Auto-generated method stub
+
 		boardDAO.increaseBoardCount(bno);
 		
 		return boardDAO.getObject(bno);
@@ -101,20 +100,20 @@ public class ExBoardServiceImpl implements ExBoardService {
 
 	@Override
 	public List<ReplyVO> getReplyList(Criteria cri) {
-		// TODO Auto-generated method stub
+	
 		return replyDAO.getList(cri);
 	}
 
 	@Override
 	public String insertReply(ReplyVO rvo) {
-		// TODO Auto-generated method stub
+	
 		return MsgMap.getInstance().getMessage(replyDAO.insert(rvo));
 	}
 
 	@Override
 	@Transactional
 	public List<FileVO> getFileList(Criteria cri) {
-		// TODO Auto-generated method stub
+
 		logger.info(cri);
 		FileDTO dto = new FileDTO();
 		logger.info("List"+fileDAO.getList(cri));
@@ -126,7 +125,7 @@ public class ExBoardServiceImpl implements ExBoardService {
 
 	@Override
 	public FileDTO getFileListAsDTO(Criteria cri) {
-		// TODO Auto-generated method stub
+	
 		List<FileVO> voList = fileDAO.getList(cri);
 		FileDTO dto = new FileDTO();
 		for(int i=0;i<voList.size();i++){

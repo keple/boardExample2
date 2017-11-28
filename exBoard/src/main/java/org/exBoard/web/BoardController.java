@@ -95,7 +95,7 @@ public class BoardController {
 		try {
 			msg = boardService.insertBoard(vo,dto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			
 		}
@@ -165,7 +165,7 @@ public class BoardController {
 		try {
 			msg =boardService.updateBoard(vo,dto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 		return msg;
@@ -277,7 +277,7 @@ public class BoardController {
 				try {
 					msg = boardService.insertBoard(vo, dto);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 				return msg;

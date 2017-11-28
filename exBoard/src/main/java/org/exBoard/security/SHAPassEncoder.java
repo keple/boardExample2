@@ -23,13 +23,13 @@ public class SHAPassEncoder implements PasswordEncoder {
 	}
 	@Override
 	public String encode(CharSequence originPassword) {
-		// TODO Auto-generated method stub
+	
 		return shaPassEncoder.encodePassword(originPassword.toString(), salt);
 	}
 
 	@Override
 	public boolean matches(CharSequence originPassword, String newPassword) {
-		// TODO Auto-generated method stub
+	
 		return shaPassEncoder.isPasswordValid(newPassword, originPassword.toString(), salt);
 	}
 

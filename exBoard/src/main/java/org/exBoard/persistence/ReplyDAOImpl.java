@@ -11,7 +11,7 @@ public class ReplyDAOImpl extends GenericDAO<ReplyVO, Integer, Criteria> {
 
 	@Override
 	public List<ReplyVO> getList(Criteria c) {
-		// TODO Auto-generated method stub
+	
 		return session.selectList(namespace+".reply_list", c);
 	}
 
@@ -29,31 +29,31 @@ public class ReplyDAOImpl extends GenericDAO<ReplyVO, Integer, Criteria> {
 
 	@Override
 	public Integer delete(Integer no) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 	@Override
 	public Integer update(ReplyVO k) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Integer getTotal() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public ReplyVO getObject(Integer v) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public Integer getPrimary(ReplyVO k) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 

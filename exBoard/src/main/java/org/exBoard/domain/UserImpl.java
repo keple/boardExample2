@@ -13,12 +13,11 @@ public class UserImpl implements UserDetails {
 	private String userpw;
 	private String userAlias;
 	private String role;
-	private String status;
 	private List<GrantedAuthority> authList;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
+		
 		authList = new ArrayList<>();
 		
 		authList.add(new SimpleGrantedAuthority("ROLE_USER"));
@@ -30,37 +29,37 @@ public class UserImpl implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
+	
 		return userpw;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
+	
 		return userid;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
+		
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
+	
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
+	
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
+	
 		return true;
 	}
 
@@ -88,13 +87,7 @@ public class UserImpl implements UserDetails {
 		this.userAlias = userAlias;
 	}
 	
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	
 
 	@Override
 	public String toString() {

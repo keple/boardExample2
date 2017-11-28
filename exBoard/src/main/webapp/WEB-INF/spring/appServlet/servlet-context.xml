@@ -27,12 +27,6 @@
 		<!-- <beans:property name="uploadTempDir" value="C:\\zzz\\temp"></beans:property> -->
 	</beans:bean>
 	<context:component-scan base-package="org.exBoard.web" />
-	<beans:bean id="logoutInterceptor" class="org.exBoard.interceptor.LogoutInterceptor"></beans:bean>
-	<interceptors>
-		<interceptor>
-			<mapping path ="/logout"/>
-			<beans:ref bean = "logoutInterceptor"/>
-		</interceptor>
-	</interceptors>
+	
 	
 </beans:beans>

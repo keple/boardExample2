@@ -26,7 +26,6 @@ public class LoginUserService implements UserDetailsService {
 		user.setUserpw(uvo.getUpw());
 		user.setUserAlias(uvo.getUname());
 		user.setRole(uvo.getRole());
-		user.setStatus("ready");
 		user.getAuthorities();
 		UserStatusMap.getInstance().pushUserData(user);
 		System.out.println("*************************"+user+"*****************");

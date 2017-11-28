@@ -15,7 +15,7 @@ public class LogoutPostHandler extends SimpleUrlLogoutSuccessHandler {
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
+		
 		
 	
 		response.sendRedirect("/login?logout");

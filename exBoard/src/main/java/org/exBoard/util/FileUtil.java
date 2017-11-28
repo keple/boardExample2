@@ -28,7 +28,7 @@ public class FileUtil {
 		return datePath;
 	}
 	private static void makeDir(String uploadPath, String ... paths) {
-		// TODO Auto-generated method stub
+		
 		if(new File(paths[paths.length-1]).exists()){
 			return;
 		}
@@ -86,7 +86,7 @@ public class FileUtil {
 	}
 
 	private static String makeIcon(String uploadPath, String path, String fileName) {
-		// TODO Auto-generated method stub
+	
 		String iconName = uploadPath + path + File.separator + fileName;
 		
 		

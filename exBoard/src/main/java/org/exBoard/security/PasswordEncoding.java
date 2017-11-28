@@ -15,13 +15,13 @@ public class PasswordEncoding implements PasswordEncoder {
 	
 	@Override
 	public String encode(CharSequence originPassword) {
-		// TODO Auto-generated method stub
+		
 		return passwordEncoder.encode(originPassword);
 	}
 
 	@Override
 	public boolean matches(CharSequence originPassword, String newPassword) {
-		// TODO Auto-generated method stub
+	
 		return passwordEncoder.matches(originPassword, newPassword);
 	}
 

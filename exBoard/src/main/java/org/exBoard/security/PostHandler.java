@@ -19,8 +19,9 @@ public class PostHandler implements AuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest arg0, HttpServletResponse arg1, Authentication arg2)
 			throws IOException, ServletException {
-		UserStatusMap.getInstance().getUserData(arg2.getName()).setStatus("AuthComplete");
+		
 		arg0.getSession().setAttribute("username", UserStatusMap.getInstance().getUserData(arg2.getName()).getUserAlias());
+		UserStatusMap.getInstance().removeData(arg2.getName());
 		arg1.sendRedirect("/board/list");
 		
 	}

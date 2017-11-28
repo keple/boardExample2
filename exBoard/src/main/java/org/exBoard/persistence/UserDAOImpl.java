@@ -14,12 +14,12 @@ public class UserDAOImpl implements UserDAO {
 	final String namespace = "org.exBoard.persistence";
 	@Override
 	public UserVO getUserById(String uid) {
-		// TODO Auto-generated method stub
+
 		return sess.selectOne(namespace+".getUserInfo",uid);
 	}
 	@Override
 	public Integer registUser(UserVO uvo) {
-		// TODO Auto-generated method stub
+
 		Integer key = 1;
 		try{
 			sess.insert(namespace+".insertUser",uvo);
@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	@Override
 	public Integer checkUser(String checkString) {
-		// TODO Auto-generated method stub
+
 		return sess.selectOne(namespace+".checkUser",checkString);
 	}
 

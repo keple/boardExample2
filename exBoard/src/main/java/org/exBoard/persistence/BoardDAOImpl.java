@@ -15,14 +15,14 @@ public class BoardDAOImpl implements BoardDAO {
 	SqlSession session;
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
-		// TODO Auto-generated method stub
+	
 		
 		return session.selectList(namespace+".boardList",cri);
 	}
 
 	@Override
 	public Integer insert(BoardVO k) {
-		// TODO Auto-generated method stub
+	
 		try{
 			session.insert(namespace+".boardInsert", k);
 			
@@ -34,7 +34,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public Integer delete(Integer no) {
-		// TODO Auto-generated method stub
+		
 		try{
 			session.delete(namespace+".deleteBoard",no);
 		}catch(Exception e){
@@ -46,7 +46,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public Integer update(BoardVO k) {
 		
-		// TODO Auto-generated method stub
+	
 		try{
 			session.update(namespace+".updateBoard",k);
 		}catch(Exception e){
@@ -57,19 +57,19 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public Integer getTotal() {
-		// TODO Auto-generated method stub
+	
 		return session.selectOne(namespace+".getBoardTotal");
 	}
 
 	@Override
 	public BoardVO getObject(Integer no) {
-		// TODO Auto-generated method stub
+
 		return session.selectOne(namespace+".findBoard",no);
 	}
 
 	@Override
 	public Integer getPrimary(BoardVO k) {
-		// TODO Auto-generated method stub
+	
 		return session.selectOne(namespace+".getBno", k);
 	}
 	public void increaseBoardCount(Integer bno){
