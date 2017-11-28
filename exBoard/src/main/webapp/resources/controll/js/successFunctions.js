@@ -120,13 +120,28 @@ var successFunctions = (function(){
 		
 		
 	}
+	var userCheckSuccess = function(result,option){
+		if(result==0){
+			$("#"+option.target).removeClass('has-error').addClass('has-success').find('.control-label').text("사용가능");
+			option.prevObject.set(option.value);
+		}else{
+			$("#"+option.target).removeClass('has-success').addClass('has-error').find('.control-label').text("사용불가");
+		}
+		
+	}
+	var userRegistSuccess = function(result,option){
+		new urlMaker(new pageChanger(),'/login').makeUrl().getPageChanger().redirect();
+		
+	}
 	return {registSuccess:registSuccess,
 			pagenation:pagenation,
 			replySuccess:replySuccess,
 			replyAccept:replyAccept,
 			fileUploadSuccess:fileUploadSuccess,
 			fileAccept:fileAccept,
-			filesForUpdatePage:filesForUpdatePage
+			filesForUpdatePage:filesForUpdatePage,
+			userCheckSuccess:userCheckSuccess,
+			userRegistSuccess:userRegistSuccess
 	};
 	
 })();

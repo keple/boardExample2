@@ -28,5 +28,10 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return key;
 	}
+	@Override
+	public Integer checkUser(String checkString) {
+		// TODO Auto-generated method stub
+		return sess.selectOne(namespace+".checkUser",checkString);
+	}
 
 }

@@ -22,10 +22,16 @@ public class CustomUserServiceImpl implements CustomUserService {
 		String newPassword = passEncoder.encode(dto.getPassword());
 		
 		System.out.println("newPassword"+"\t"+newPassword);
-		uvo.setUserid(dto.getUsername());
+		uvo.setUserid(dto.getUserid());
+		uvo.setUname(dto.getUsername());
 		uvo.setUpw(newPassword);
 		uvo.setRole("user");
 		return MsgMap.getInstance().getMessage(udao.registUser(uvo));
+	}
+	@Override
+	public Integer checkUser(String checkString) {
+		// TODO Auto-generated method stub
+		return udao.checkUser(checkString);
 	}
 
 }

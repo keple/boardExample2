@@ -8,9 +8,12 @@
   		select * from tbl_user where userid =#{userid};
   	</select>
   	<insert id="insertUser" parameterType="UserVO">
-  		insert into tbl_user(userid,upw,role) values(#{userid},#{upw},#{role})
+  		insert into tbl_user(userid,usename,upw,role) values(#{userid},#{uname},#{upw},#{role})
   	</insert>
-  
+  	<select id="checkUser" parameterType="String" resultType="Integer">
+  		select count(userid) from tbl_user where userid=#{check} and username=#{check}
+  	
+  	</select>
   
   
   

@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserImpl implements UserDetails {
 	private String userid;
 	private String userpw;
+	private String userAlias;
 	private String role;
+	private String status;
 	private List<GrantedAuthority> authList;
 
 	@Override
@@ -77,10 +79,29 @@ public class UserImpl implements UserDetails {
 	public void setUserpw(String userpw) {
 		this.userpw = userpw;
 	}
+	
+	public String getUserAlias() {
+		return userAlias;
+	}
+
+	public void setUserAlias(String userAlias) {
+		this.userAlias = userAlias;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public String toString() {
-		return "UserImpl [userid=" + userid + ", userpw=" + userpw + ", role=" + role + ", authList=" + authList + "]";
+		return "UserImpl [userid=" + userid + ", userpw=" + userpw + ", userAlias=" + userAlias + ", role=" + role
+				+ ", authList=" + authList + "]";
 	}
+
+	
 
 }

@@ -9,7 +9,7 @@
           <div class="box box-info"style="min-height:800px;">
           
             <div class="box-header with-border">
-              <h3 class="box-title">게시판</h3>
+              <h3 class="box-title">게시판'${username}'</h3>
 
             
             </div>

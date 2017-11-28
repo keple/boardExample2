@@ -38,7 +38,7 @@
     
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">메인페이지</a>
+ 
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -56,34 +56,88 @@
     </span>
   </div>
 </nav>
-
-  <div class="wrapper" style="width:80%;height:80%;position:absolute;">
-  <div id="Indicators" class="carousel slide center">
-    <ol class="carousel-indicators">
+<section>
+  <div id="wrapper"class="box-body" style="width:80%;height:60%;margin-left:20%;margin-top:5%;border-radius:15px;">
+  <div id="Indicators" class="carousel slide" data-ride="carousel" style="width:80%;">
+    <ol class="carousel-indicators" style="width:60%">
       <li data-target="#Indicators" data-slide-to="0" class="active"></li>
-      <li data-target="#Indicators" data-slide-to="1"></li>
+      <li data-target="#Indicators" data-slide-to="1" class=""></li>
+      <li data-target="#Indicators" data-slide-to="2" class=""></li>
+      <li data-target="#Indicators" data-slide-to="3" class=""></li>
+      <li data-target="#Indicators" data-slide-to="4" class=""></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
-        <video id="fst" class="d-block img-fluid"  autoplay loop style="width:100%;height:100%;" controls>
-          <source src="/resources/img/success.mp4" type="video/mp4">
-        </video>
-        <div class="carousel-caption" style="color:black">
-          <h3>JPA예제</h3>
-         </div>
+      <div class="carousel-item active"style="width:100%;">
+        <img src="/resources/img/carousel1.jpg"style="width:100%;height:60%"></image>
+        
       </div>
-      <div class="carousel-item">
-         <video id="fst" class="d-block img-fluid" style="width:100%;height:100%;" controls>
-          <source src="/resources/img/boardTest.mp4" type="video/mp4">
-        </video>
-        <div class="carousel-caption" style="color:white">
-         <h3>현재게시판 파일 업로드</h3>
-         </div>
+      <div class="carousel-item"style="width:100%;">
+      	<img src="/resources/img/carousel3.jpg"style="width:100%;height:60%"></image>
+      </div>
+       <div class="carousel-item"style="width:100%;">
+         <img src="/resources/img/carousel4.PNG"style="width:100%;height:60%"></image>
+        
+      </div>
+       <div class="carousel-item"style="width:100%;">
+         <img src="/resources/img/carousel5.jpg"style="width:100%;height:60%"></image>
+        
+      </div>
+       <div class="carousel-item"style="width:100%;">
+         <img src="/resources/img/carousel6.jpg"style="width:100%;height:60%"></image>
+        
       </div>
     </div>
   </div>
-   
-  </div>
 
+  </div>
+     <div id="introContent">
+  	
+  		<h2>Introduce</h2>
+  		<div id="inner">
+	  		<div id="intro">
+	  			<h3>경기 과학기술대학교 컴퓨터정보 시스템과 졸업</h3>
+	  			<br>
+	  			<h3>웹개발자를 꿈꾸며 계속해서 공부하고있습니다.</h3>
+	  			<br>
+	  			<h3></h3>
+	  		</div>
+	  		<div id="imgs">
+	  			<img src="/resources/img/4dolar.jpg"></img>
+	  			<img src="/resources/img/gtec.jpg"></img>
+	  		</div>
+  		</div>
+  		
+  
+  </div>
+</section>
 </body>
+<script>
+$(document).ready(function(){
+	console.log("윈도우 사이즈",window.innerHeight);
+	console.log("스크롤 위치",document.body.scrollTop);
+	var introDiv = $("#introContent");
+	$(document).on("scroll",function(e){
+		console.log("??",$(document).scrollTop());
+		var scrollHeight = $(document).scrollTop()
+		if(scrollHeight>10){
+			introDiv.css('display','block');
+			introDiv.addClass('show-cont');
+			introDiv.one('webkitAnimationEnd',function(e){
+				$("#intro").css('display','inline-block');
+				$("#imgs").css('display','inline-block');
+				$("#intro").addClass('show-cont');
+				$("#imgs").addClass('show-cont');
+			});
+		}
+		
+		
+	});
+		
+	
+	
+	
+	
+});
+
+</script>
 </html>

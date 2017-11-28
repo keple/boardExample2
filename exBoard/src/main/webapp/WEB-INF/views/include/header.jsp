@@ -295,7 +295,7 @@
              </sec:authorize>
              
              <sec:authorize access="isAuthenticated()">
-              <span class="hidden-xs"><sec:authentication property="principal.username" htmlEscape='false'/></span>
+              <span class="hidden-xs"> ${username} </span>
             </sec:authorize>
             </a>
             <ul class="dropdown-menu">
@@ -306,7 +306,7 @@
 				
 				<sec:authorize access="isAuthenticated()">
                 <p>
-                  <sec:authentication property="principal.username"/>
+                  <span> ${username} </span>
                   <small>Member since Nov. 2012</small>
                 </p>
                 </sec:authorize>
@@ -342,7 +342,10 @@
                 </div>
                 
                 <div class="pull-right">
-                  <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
+                  <form action="/logout" method="post"> 
+                  	<button type="submit"class="btn btn-default btn-flat">Sign out</button>
+                  	<input type="hidden" name="_csrf" value='${_csrf.token}'/>
+                  </form>
                 </div>
                 </sec:authorize>
               </li>

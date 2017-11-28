@@ -2,7 +2,7 @@ package org.exBoard.domain;
 
 public class UserVO {
 	private String userid;
-	private String uname;
+	private String username;
 	private String upw;
 	private String role;
 	
@@ -16,10 +16,10 @@ public class UserVO {
 		this.userid = userid;
 	}
 	public String getUname() {
-		return uname;
+		return username;
 	}
 	public void setUname(String uname) {
-		this.uname = uname;
+		this.username = uname;
 	}
 	public String getRole() {
 		return role;
@@ -35,7 +35,7 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [uid=" + userid + ", uname=" + uname + ", upw=" + upw + ", role=" + role + "]";
+		return "UserVO [uid=" + userid + ", uname=" + username + ", upw=" + upw + ", role=" + role + "]";
 	}
 	
 	

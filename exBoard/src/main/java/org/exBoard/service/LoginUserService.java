@@ -5,11 +5,11 @@ import javax.inject.Inject;
 import org.exBoard.domain.UserImpl;
 import org.exBoard.domain.UserVO;
 import org.exBoard.persistence.UserDAO;
+import org.exBoard.util.UserStatusMap;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 @EnableWebSecurity
 public class LoginUserService implements UserDetailsService {
@@ -18,13 +18,17 @@ public class LoginUserService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		
 		UserVO uvo = udao.getUserById(username);
 		
 		UserImpl user = new UserImpl();
 		user.setUserid(uvo.getUserid());
-		user.setUserpw(uvo.getUpw()); 
+		user.setUserpw(uvo.getUpw());
+		user.setUserAlias(uvo.getUname());
 		user.setRole(uvo.getRole());
+		user.setStatus("ready");
 		user.getAuthorities();
+		UserStatusMap.getInstance().pushUserData(user);
 		System.out.println("*************************"+user+"*****************");
 		
 		return user;

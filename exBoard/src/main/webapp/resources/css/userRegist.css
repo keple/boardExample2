@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+html{
+	height:102%;
+	-webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: scroll;
+	
+}
+body{
+  background-image: url('/resources/img/registBackImg.gif');
+  background-size: cover;
+  background-color: hsla(0,0%,100%,0.20);
+  background-blend-mode: overlay;
+}
+.formWrapper h4{
+	color:white;
+	font-style: oblique;
+}
+.show-cont{
+	-webkit-animation:showContent;
+	-webkit-animation-duration:1500ms;
+
+}
+@-webkit-keyframes showContent{
+	0%{
+		-webkit-transform:translateY(200%);
+		opacity:0.0;
+	}
+	25%{
+		-webkit-transform translateY(190%);
+		opacity:0.1;
+	}
+	50%{
+		-webkit-transform translateY(175%);
+		opacity:0.2;
+	}
+	100%{
+		-webkit-transform translateY(100%);
+		opacity:1.0;
+	}
+
+}

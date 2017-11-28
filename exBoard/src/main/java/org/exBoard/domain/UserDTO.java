@@ -1,6 +1,7 @@
 package org.exBoard.domain;
 
 public class UserDTO {
+	private String userid;
 	private String username;
 	private String password;
 	
@@ -16,10 +17,18 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	@Override
 	public String toString() {
-		return "UserDTO [username=" + username + ", password=" + password + "]";
+		return "UserDTO [userid=" + userid + ", username=" + username + ", password=" + password + "]";
 	}
+	
 
 
 	
