@@ -95,15 +95,15 @@
   		<h2>Introduce</h2>
   		<div id="inner">
 	  		<div id="intro">
-	  			<h3>경기 과학기술대학교 컴퓨터정보 시스템과 졸업</h3>
+	  			<h3>내용없음</h3>
 	  			<br>
-	  			<h3>웹개발자를 꿈꾸며 계속해서 공부하고있습니다.</h3>
+	  			<h3>추가예정</h3>
 	  			<br>
 	  			<h3></h3>
 	  		</div>
 	  		<div id="imgs">
 	  			<img src="/resources/img/4dolar.jpg"></img>
-	  			<img src="/resources/img/gtec.jpg"></img>
+	  			
 	  		</div>
   		</div>
   		

@@ -156,6 +156,7 @@ $(document).ready(function(){
 		replyDeleteUrl.setParam('bno',$bno)
 					  .makeUrl()
 					  .getPageChanger()
+					  .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
 					  .setType('delete')
 					  .setSuccess(successFunctions.registSuccess)
 					  .callAjax();

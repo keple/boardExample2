@@ -271,7 +271,7 @@ public class BoardController {
 	@PostMapping(value="/registWithEditor", produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String register2Post(BoardVO vo,FileDTO dto) throws UnsupportedEncodingException{
-		logger.info("우린예전에 끝났어"+dto);
+
 		
 		String msg=null;
 				try {

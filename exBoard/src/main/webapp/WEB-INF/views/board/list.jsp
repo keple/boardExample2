@@ -91,9 +91,9 @@
 </script>
 <script>
 
-$("#aniDiv").addClass("fly-OutContent");
+$("#aniDiv").addClass("fly-InContent");
  $("#aniDiv").on("webkitAnimationEnd",function(e){
-	$(this).removeClass("fly-OutContent");
+	$(this).removeClass("fly-InContent");
 	
 });
 </script>
