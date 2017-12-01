@@ -33,9 +33,9 @@
 				<span>사용자 아이디를 입력해 주세요</span>
 		        <label class="control-label"><i class="fa fa-check"></i>사용불가</label>
 		        <div class="input-group input-group-sm">
-		            <input type="text" id="uid"class="form-control"name="userid" placeholder="Enter ..." maxlength='25'>
+		            <input type="text" id="uid"class="form-control"name="userid" onkeyup="userCheck(event)" placeholder="Enter ..." maxlength='25'>
 		            <span class="input-group-btn">
-                       <button type="button" id="uidCheck" class="btn btn-warning btn-flat"onclick="userCheck(event)">검사요청</button>
+                       <button type="button" id="uidCheck" class="btn btn-warning btn-flat">검사요청</button>
                     </span>
                 </div>
 		        <span class="help-block">중복된 아이디를 제외하곤 사용할 수 있습니다.(아이디5글자 이상)</span>
@@ -48,9 +48,9 @@
 				<span>이름을 입력해주세요.</span>
 				<label class="control-label"><i class="fa fa-check"></i>사용불가</label>
 		         <div class="input-group input-group-sm">
-		            <input type="text" id="uname"class="form-control"name="username" placeholder="Enter ..." maxlength='10'>
+		            <input type="text" id="uname"class="form-control"name="username" onkeyup="userCheck(event)" placeholder="Enter ..." maxlength='10'>
 		            <span class="input-group-btn">
-                       <button type="button" id="unameCheck"class="btn btn-warning btn-flat" onclick="userCheck(event)">검사요청</button>
+                       <button type="button" id="unameCheck"class="btn btn-warning btn-flat">검사요청</button>
                     </span>
                 </div>
                 <span class="help-block">이름은 10글자 까지입니다.</span>
@@ -71,12 +71,12 @@
 <script>
 $(document).ready(function(){
 	var registForm = $(".formWrapper").addClass('show-cont');
-	$("#uid").on("change",function(e){
+	$("#uid").on("keyup",function(e){
 		console.log("flagChanged In ID");
 		$("#idContainer").removeClass('has-success').addClass('has-error').find('.control-label').text("사용불가");
 		flag = false;
 	});
-	$("#uname").on("change",function(e){
+	$("#uname").on("keyup",function(e){
 		console.log("flagChanged In userName");
 		$("#nameContainer").removeClass('has-success').addClass('has-error').find('.control-label').text("사용불가");
 		flag=false;

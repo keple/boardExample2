@@ -16,8 +16,8 @@ function userCheck(event){
 		event.preventDefault();
 		console.log("누구?",event.target.id);
 		var id = event.target.id.trim();
-		var targetDiv = id=='uidCheck'?'idContainer':'nameContainer';
-		var checkTarget = id=='uidCheck'?$("#uid").val():$("#uname").val();
+		var targetDiv = id=='uid'?'idContainer':'nameContainer';
+		var checkTarget = id=='uid'?$("#uid").val():$("#uname").val();
 		console.log(checkTarget);
 		if(checkTarget.trim()!=""&&checkTarget.length>5){
 			new urlMaker(new pageChanger(),'/user/check',true).setParam("checkString",decodeURI(checkTarget))
