@@ -8,7 +8,12 @@ idContainer:{val:'',
 nameContainer:{val:'',
 			   set:function(name){this.val=name},
 			   get:function(){return this.val}
-			   }
+			   },
+emailContainer:{val:'',
+				set:function(email){this.val=email},
+			    get:function(){return this.val}
+	
+}
 			   
 			
 };
@@ -25,7 +30,10 @@ function userCheck(event){
 														   .getPageChanger()
 														   .setType('post')
 														   .setHeader('X-CSRF-TOKEN',$('meta[name="csrf_token"]').attr('content'))
-														   .setSuccess(successFunctions.userCheckSuccess,{target:targetDiv,prevObject:prevObject[targetDiv],value:decodeURI(checkTarget)})
+														   .setSuccess(successFunctions.userCheckSuccess,
+																   {target:targetDiv,
+															        prevObject:prevObject[targetDiv],
+															        value:decodeURI(checkTarget)})
 														   .callAjax();
 		}
 		
@@ -44,6 +52,7 @@ function userCheck(event){
 			};
 		
 	};
+	
 	function isCheckFunctionEnd(prevObject){
 		var idCheck = $("#idContainer")[0].className;
 		var nameCheck = $("#nameContainer")[0].className;
@@ -66,10 +75,14 @@ function userCheck(event){
 	function checkFromPrev(prevObject){
 		var $userid = $("#uid").val(),
 			$username = $("#uname").val();
-		if($userid==prevObject.idContainer.get()&&$username==prevObject.nameContainer.get()){
+			$email = $("#email").val();
+		if($userid==prevObject.idContainer.get()&&
+			$username==prevObject.nameContainer.get()&&
+			$email.trim()!=''){
 			return false;
 		}
 		alert("내용변경하시면 검사요청 꼭 해주세요^^");
 		return true;
 	}
+	
 	

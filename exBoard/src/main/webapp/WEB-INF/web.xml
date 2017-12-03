@@ -13,7 +13,10 @@
 		</param-value>
 		
 	</context-param>
-	
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/errors/404Error.jsp</location>
+	</error-page>
  <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>

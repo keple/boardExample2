@@ -32,12 +32,8 @@
 			<div id="idContainer"class="form-group has-error">
 				<span>사용자 아이디를 입력해 주세요</span>
 		        <label class="control-label"><i class="fa fa-check"></i>사용불가</label>
-		        <div class="input-group input-group-sm">
-		            <input type="text" id="uid"class="form-control"name="userid" onkeyup="userCheck(event)" placeholder="Enter ..." maxlength='25'>
-		            <span class="input-group-btn">
-                       <button type="button" id="uidCheck" class="btn btn-warning btn-flat">검사요청</button>
-                    </span>
-                </div>
+		        	<input type="text" id="uid"class="form-control"name="userid" onkeyup="userCheck(event)" placeholder="Enter ..." maxlength='25'>
+		      
 		        <span class="help-block">중복된 아이디를 제외하곤 사용할 수 있습니다.(아이디5글자 이상)</span>
 		    </div>
 		    <div class="form-group">
@@ -47,15 +43,21 @@
 			<div id="nameContainer"class="form-group has-error">
 				<span>이름을 입력해주세요.</span>
 				<label class="control-label"><i class="fa fa-check"></i>사용불가</label>
-		         <div class="input-group input-group-sm">
+		         
 		            <input type="text" id="uname"class="form-control"name="username" onkeyup="userCheck(event)" placeholder="Enter ..." maxlength='10'>
-		            <span class="input-group-btn">
-                       <button type="button" id="unameCheck"class="btn btn-warning btn-flat">검사요청</button>
-                    </span>
-                </div>
+		           
+             
                 <span class="help-block">이름은 10글자 까지입니다.</span>
 			</div>
+			
+				<span>이메일을 입력해주세요.</span>
+		         
+		            <input type="text" id="email"class="form-control"name="email" placeholder="Enter ...">
+           
+			
+			
 			<input type="hidden"name="_csrf"value='${_csrf.token}'></input>
+			
 		</form>
 		<a id="regRequest"class="btn btn-app">
             <span class="badge bg-purple">등록!</span>
