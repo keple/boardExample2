@@ -39,7 +39,7 @@ public class UserController {
 		//태그 안먹히는거같음.
 		builder.append("<br>");
 		//아직 링크 만들지는 않음.
-		mService.sendMailToUser("인증메일 요청", builder.toString(), "smw195@naver.com", email.trim(), null);
+		mService.sendMailToUser("인증메일 요청", builder.toString(), "xxx@xxx", email.trim(), null);
 		
 		
 	}
